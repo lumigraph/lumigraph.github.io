@@ -1,0 +1,665 @@
+<!--
+    2012726055_hospitalapi.html
+    Homework2
+
+    Created by Yoo-Na Kim on 05/18/2016.
+    Copyright (c) 2016 Yoo-Na Kim. All rights reserved.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>OpenAPI Test Page</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+          crossorigin="anonymous">
+    <style>
+        @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+        @import url(https://fonts.googleapis.com/css?family=Timmana);
+
+        a {  text-decoration: none; }
+
+        textarea { resize: none; !important }
+    </style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>OpenAPI Test Page <small>공공데이터 활용 프로젝트</small></h1>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="http://opendata.hira.or.kr/op/opc/selectOpnsApi.do?sno=713">병원정보검색 (진료과목을 모두 포함하는 결과)</a></h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <!-- 구 선택 -->
+                <select class="form-control" id="districtSelect">
+                    <option value="110016">종로구</option>
+                    <option value="110017">중구</option>
+                    <option value="110014">용산구</option>
+                    <option value="110011">성동구</option>
+                    <option value="110023">광진구</option>
+                    <option value="110007">동대문구</option>
+                    <option value="110019">중랑구</option>
+                    <option value="110012">성북구</option>
+                    <option value="110024">강북구</option>
+                    <option value="110006">도봉구</option>
+                    <option value="110022">노원구</option>
+                    <option value="110015">은평구</option>
+                    <option value="110010">서대문구</option>
+                    <option value="110009">마포구</option>
+                    <option value="110020">양천구</option>
+                    <option value="110003">강서구</option>
+                    <option value="110005">구로구</option>
+                    <option value="110025">금천구</option>
+                    <option value="110013">영등포구</option>
+                    <option value="110008">동작구</option>
+                    <option value="110004">관악구</option>
+                    <option value="110021">서초구</option>
+                    <option value="110001">강남구</option>
+                    <option value="110018">송파구</option>
+                    <option value="110002">강동구</option>
+                </select>
+                <!-- 진료과 선택 -->
+                <div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios1" value="all" checked>
+                            전체 검색
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios2" value="00">
+                            일반의
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios3" value="01">
+                            <strong>내과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios4" value="02">
+                            신경과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios5" value="03">
+                            <strong>정신건강의학과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios6" value="04">
+                            <strong>외과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios7" value="05">
+                            <strong>정형외과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios8" value="06">
+                            신경외과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios9" value="07">
+                            흉부외과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios10" value="08">
+                            <strong>성형외과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios11" value="09">
+                            <strong>마취통증의학과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios12" value="10">
+                            <strong>산부인과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios13" value="11">
+                            <strong>소아청소년과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios14" value="12">
+                            <strong>안과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios15" value="13">
+                            <strong>이비인후과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios16" value="14">
+                            <strong>피부과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios17" value="15">
+                            <strong>비뇨기과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios18" value="16">
+                            영상의학과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios19" value="17">
+                            방사선종양학과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios20" value="18">
+                            병리과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios21" value="19">
+                            진단검사의학과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios22" value="20">
+                            결핵과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios23" value="21">
+                            <strong>재활의학과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios24" value="22">
+                            핵의학과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios25" value="23">
+                            <strong>가정의학과</strong>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios26" value="24">
+                            응급의학과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios27" value="25">
+                            직업환경의학과
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="radios" id="radios28" value="26">
+                            예방의학과
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+            </div>
+        </div>
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="https://developers.google.com/maps/?hl=ko">검색 결과(지도 마커를 클릭해보세요!)</a></h3>
+        </div>
+        <div class="panel-body">
+            <div id="map" style="width:100%; height:640px;"></div>
+        </div>
+    </div>
+
+    <footer>
+        Copyright &copy; 2016 Yoo-Na Kim. All Rights Reserved.
+    </footer>
+    <br>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>]
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+
+<!-- xml2json -->
+<script>
+    /*
+     ### jQuery XML to JSON Plugin v1.1 - 2008-07-01 ###
+     * http://www.fyneworks.com/ - diego@fyneworks.com
+     * Dual licensed under the MIT and GPL licenses:
+     *   http://www.opensource.org/licenses/mit-license.php
+     *   http://www.gnu.org/licenses/gpl.html
+     ###
+     Website: http://www.fyneworks.com/jquery/xml-to-json/
+     *//*
+     # INSPIRED BY: http://www.terracoder.com/
+     AND: http://www.thomasfrank.se/xml_to_json.html
+     AND: http://www.kawa.net/works/js/xml/objtree-e.html
+     *//*
+     This simple script converts XML (document of code) into a JSON object. It is the combination of 2
+     'xml to json' great parsers (see below) which allows for both 'simple' and 'extended' parsing modes.
+     */
+    // Avoid collisions
+    ;if(window.jQuery) (function($){
+
+        // Add function to jQuery namespace
+        $.extend({
+
+            // converts xml documents and xml text to json object
+            xml2json: function(xml, extended) {
+                if(!xml) return {}; // quick fail
+
+                //### PARSER LIBRARY
+                // Core function
+                function parseXML(node, simple){
+                    if(!node) return null;
+                    var txt = '', obj = null, att = null;
+                    var nt = node.nodeType, nn = jsVar(node.localName || node.nodeName);
+                    var nv = node.text || node.nodeValue || '';
+                    /*DBG*/ //if(window.console) console.log(['x2j',nn,nt,nv.length+' bytes']);
+                    if(node.childNodes){
+                        if(node.childNodes.length>0){
+                            /*DBG*/ //if(window.console) console.log(['x2j',nn,'CHILDREN',node.childNodes]);
+                            $.each(node.childNodes, function(n,cn){
+                                var cnt = cn.nodeType, cnn = jsVar(cn.localName || cn.nodeName);
+                                var cnv = cn.text || cn.nodeValue || '';
+                                /*DBG*/ //if(window.console) console.log(['x2j',nn,'node>a',cnn,cnt,cnv]);
+                                if(cnt == 8){
+                                    /*DBG*/ //if(window.console) console.log(['x2j',nn,'node>b',cnn,'COMMENT (ignore)']);
+                                    return; // ignore comment node
+                                }
+                                else if(cnt == 3 || cnt == 4 || !cnn){
+                                    // ignore white-space in between tags
+                                    if(cnv.match(/^\s+$/)){
+                                        /*DBG*/ //if(window.console) console.log(['x2j',nn,'node>c',cnn,'WHITE-SPACE (ignore)']);
+                                        return;
+                                    };
+                                    /*DBG*/ //if(window.console) console.log(['x2j',nn,'node>d',cnn,'TEXT']);
+                                    txt += cnv.replace(/^\s+/,'').replace(/\s+$/,'');
+                                    // make sure we ditch trailing spaces from markup
+                                }
+                                else{
+                                    /*DBG*/ //if(window.console) console.log(['x2j',nn,'node>e',cnn,'OBJECT']);
+                                    obj = obj || {};
+                                    if(obj[cnn]){
+                                        /*DBG*/ //if(window.console) console.log(['x2j',nn,'node>f',cnn,'ARRAY']);
+
+                                        // http://forum.jquery.com/topic/jquery-jquery-xml2json-problems-when-siblings-of-the-same-tagname-only-have-a-textnode-as-a-child
+                                        if(!obj[cnn].length) obj[cnn] = myArr(obj[cnn]);
+                                        obj[cnn] = myArr(obj[cnn]);
+
+                                        obj[cnn][ obj[cnn].length ] = parseXML(cn, true/* simple */);
+                                        obj[cnn].length = obj[cnn].length;
+                                    }
+                                    else{
+                                        /*DBG*/ //if(window.console) console.log(['x2j',nn,'node>g',cnn,'dig deeper...']);
+                                        obj[cnn] = parseXML(cn);
+                                    };
+                                };
+                            });
+                        };//node.childNodes.length>0
+                    };//node.childNodes
+                    if(node.attributes){
+                        if(node.attributes.length>0){
+                            /*DBG*/ //if(window.console) console.log(['x2j',nn,'ATTRIBUTES',node.attributes])
+                            att = {}; obj = obj || {};
+                            $.each(node.attributes, function(a,at){
+                                var atn = jsVar(at.name), atv = at.value;
+                                att[atn] = atv;
+                                if(obj[atn]){
+                                    /*DBG*/ //if(window.console) console.log(['x2j',nn,'attr>',atn,'ARRAY']);
+
+                                    // http://forum.jquery.com/topic/jquery-jquery-xml2json-problems-when-siblings-of-the-same-tagname-only-have-a-textnode-as-a-child
+                                    //if(!obj[atn].length) obj[atn] = myArr(obj[atn]);//[ obj[ atn ] ];
+                                    obj[cnn] = myArr(obj[cnn]);
+
+                                    obj[atn][ obj[atn].length ] = atv;
+                                    obj[atn].length = obj[atn].length;
+                                }
+                                else{
+                                    /*DBG*/ //if(window.console) console.log(['x2j',nn,'attr>',atn,'TEXT']);
+                                    obj[atn] = atv;
+                                };
+                            });
+                            //obj['attributes'] = att;
+                        };//node.attributes.length>0
+                    };//node.attributes
+                    if(obj){
+                        obj = $.extend( (txt!='' ? new String(txt) : {}),/* {text:txt},*/ obj || {}/*, att || {}*/);
+                        txt = (obj.text) ? (typeof(obj.text)=='object' ? obj.text : [obj.text || '']).concat([txt]) : txt;
+                        if(txt) obj.text = txt;
+                        txt = '';
+                    };
+                    var out = obj || txt;
+                    //console.log([extended, simple, out]);
+                    if(extended){
+                        if(txt) out = {};//new String(out);
+                        txt = out.text || txt || '';
+                        if(txt) out.text = txt;
+                        if(!simple) out = myArr(out);
+                    };
+                    return out;
+                };// parseXML
+                // Core Function End
+                // Utility functions
+                var jsVar = function(s){ return String(s || '').replace(/-/g,"_"); };
+
+                // NEW isNum function: 01/09/2010
+                // Thanks to Emile Grau, GigaTecnologies S.L., www.gigatransfer.com, www.mygigamail.com
+                function isNum(s){
+                    // based on utility function isNum from xml2json plugin (http://www.fyneworks.com/ - diego@fyneworks.com)
+                    // few bugs corrected from original function :
+                    // - syntax error : regexp.test(string) instead of string.test(reg)
+                    // - regexp modified to accept  comma as decimal mark (latin syntax : 25,24 )
+                    // - regexp modified to reject if no number before decimal mark  : ".7" is not accepted
+                    // - string is "trimmed", allowing to accept space at the beginning and end of string
+                    var regexp=/^((-)?([0-9]+)(([\.\,]{0,1})([0-9]+))?$)/
+                    return (typeof s == "number") || regexp.test(String((s && typeof s == "string") ? jQuery.trim(s) : ''));
+                };
+                // OLD isNum function: (for reference only)
+                //var isNum = function(s){ return (typeof s == "number") || String((s && typeof s == "string") ? s : '').test(/^((-)?([0-9]*)((\.{0,1})([0-9]+))?$)/); };
+
+                var myArr = function(o){
+
+                    // http://forum.jquery.com/topic/jquery-jquery-xml2json-problems-when-siblings-of-the-same-tagname-only-have-a-textnode-as-a-child
+                    //if(!o.length) o = [ o ]; o.length=o.length;
+                    if(!$.isArray(o)) o = [ o ]; o.length=o.length;
+
+                    // here is where you can attach additional functionality, such as searching and sorting...
+                    return o;
+                };
+                // Utility functions End
+                //### PARSER LIBRARY END
+
+                // Convert plain text to xml
+                if(typeof xml=='string') xml = $.text2xml(xml);
+
+                // Quick fail if not xml (or if this is a node)
+                if(!xml.nodeType) return;
+                if(xml.nodeType == 3 || xml.nodeType == 4) return xml.nodeValue;
+
+                // Find xml root node
+                var root = (xml.nodeType == 9) ? xml.documentElement : xml;
+
+                // Convert xml to json
+                var out = parseXML(root, true /* simple */);
+
+                // Clean-up memory
+                xml = null; root = null;
+
+                // Send output
+                return out;
+            },
+
+            // Convert text to XML DOM
+            text2xml: function(str) {
+                // NOTE: I'd like to use jQuery for this, but jQuery makes all tags uppercase
+                //return $(xml)[0];
+                var out;
+                try{
+                    var xml = ($.browser.msie)?new ActiveXObject("Microsoft.XMLDOM"):new DOMParser();
+                    xml.async = false;
+                }catch(e){ throw new Error("XML Parser could not be instantiated") };
+                try{
+                    if($.browser.msie) out = (xml.loadXML(str))?xml:false;
+                    else out = xml.parseFromString(str, "text/xml");
+                }catch(e){ throw new Error("Error parsing XML string") };
+                return out;
+            }
+
+        }); // extend $
+
+    })(jQuery);
+</script>
+
+<!-- jqueryajax -->
+<script>
+    /**
+     * jQuery.ajax mid - CROSS DOMAIN AJAX
+     * ---
+     * @author James Padolsey (http://james.padolsey.com)
+     * @version 0.11
+     * @updated 12-JAN-10
+     * ---
+     * Note: Read the README!
+     * ---
+     * @info http://james.padolsey.com/javascript/cross-domain-requests-with-jquery/
+     */
+
+    jQuery.ajax = (function(_ajax){
+
+        var protocol = location.protocol,
+                hostname = location.hostname,
+                exRegex = RegExp(protocol + '//' + hostname),
+                YQL = 'http' + (/^https/.test(protocol)?'s':'') + '://query.yahooapis.com/v1/public/yql?callback=?',
+                query = 'select * from xml where url="{URL}"';
+
+        function isExternal(url) {
+            return !exRegex.test(url) && /:\/\//.test(url);
+        }
+
+        return function(o) {
+
+            var url = o.url;
+
+            if ( /get/i.test(o.type) && !/json/i.test(o.dataType) && isExternal(url) ) {
+
+                // Manipulate options so that JSONP-x request is made to YQL
+
+                o.url = YQL;
+                o.dataType = 'json';
+
+                o.data = {
+                    q: query.replace(
+                            '{URL}',
+                            url + (o.data ?
+                            (/\?/.test(url) ? '&' : '?') + jQuery.param(o.data)
+                                    : '')
+                    ),
+                    format: 'xml'
+                };
+
+                // Since it's a JSONP request
+                // complete === success
+                if (!o.success && o.complete) {
+                    o.success = o.complete;
+                    delete o.complete;
+                }
+
+                o.success = (function(_success){
+                    return function(data) {
+
+                        if (_success) {
+                            // Fake XHR callback.
+                            _success.call(this, {
+                                responseText: (data.results[0] || '')
+                                // YQL screws with <script>s
+                                // Get rid of them
+                                        .replace(/<script[^>]+?\/>|<script(.|\s)*?\/script>/gi, '')
+                            }, 'success');
+                        }
+
+                    };
+                })(o.success);
+            }
+
+            return _ajax.apply(this, arguments);
+        };
+
+    })(jQuery.ajax);
+</script>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASPo1x7pS72_qGMuOnuiXInl3zYkt13kk&callback=initMap"
+        async defer></script>
+<!-- request.js (my custom function defined to handle OpenAPI) -->
+<script>
+    // OpenAPI authorization key
+    var authKey = 'C1Sl2WSWCwVQMx%2BLngIVV84ZtLYx1OA5rGCGovldfhPwOs6wO4Uoy0wMG9c4XH2tf90OO0IG%2FZOq0O4iwh2ZoQ%3D%3D';
+    var mapKey  = '011f00f7b58211a3d9d86dbe89c82781';
+    var seoulCode = '110000';
+    var basicPrefix    = 'http://openapi.hira.or.kr/openapi/service/hospInfoService';
+    var detailPrefix   = 'http://openapi.hira.or.kr/openapi/service/medicInsttDetailInfoService';
+    var basicService   = 'getHospBasisList';
+    var detailServices = [ 'getFacilityInfo', 'getDetailInfo', 'getMdlrtSbjectInfoList', 'getTransportInfoList'
+        , 'getMedicalEquipmentInfoList', 'getCgffdAddiInfoList', 'getNursigGradeInfoList', 'getSpclMdlrtInfoList'
+        , 'getSpcHospAppnFieldList'];
+
+    var map;
+    var markers = [];
+    var itemArray;
+    var infowindow = null;
+    ;
+
+    function initMap()
+    {
+        // Create a map object and specify the DOM element for display.
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 37.5663, lng: 126.9779},
+            scrollwheel: false,
+            zoom: 11
+        });
+    }
+
+    $(document).ready(function()
+    {
+        $('#submitButton').click(function () {
+            var districtValue = $('#districtSelect').val();
+            var deptValue = $('input[name=radios]:radio:checked').val();
+
+            var basicUrl = basicPrefix + '/' + basicService + '?ServiceKey=' + authKey;
+            var params = '&pageNo=1&numOfRows=3000&sidoCd=110000'
+                    + '&sgguCd=' + districtValue;
+
+            if (deptValue != 'all') {
+                params += '&dgsbjtCd=' + deptValue;
+            }
+
+            deleteMarkers();
+
+            $.ajax({
+                url: basicUrl + params,
+                type: 'get',
+                dataType: 'xml',
+                async: false,
+                cache: false,
+                success: basicResponse,
+                error: basicError
+            });
+        });
+    });
+
+    function basicResponse(object)
+    {
+        var $xml = $(object.responseText);
+        var totalCount = $xml.find('totalCount').text();
+
+        if(totalCount != 0)
+        {
+            var $items = $xml.find('items');
+            var itemArray = new Array();
+
+            $items.find('item').each(function (index, element)
+            {
+                var item = new Array();
+                item.ykiho = $(element).find('ykiho').text();
+                item.yadmNm = $(element).find('yadmNm').text();
+                item.clCdNm = $(element).find('clCdNm').text();
+                item.addr = $(element).find('addr').text();
+                item.telno = $(element).find('telno').text();
+                item.hospUrl = $(element).find('hospUrl').text();
+                item.estbDd = $(element).find('estbDd').text();
+                item.drTotCnt = $(element).find('drTotCnt').text();
+                item.gdrCnt = $(element).find('gdrCnt').text();
+                item.intnCnt = $(element).find('intnCnt').text();
+                item.resdntCnt = $(element).find('resdntCnt').text();
+                item.sdrCnt = $(element).find('sdrCnt').text();
+                item.xPos = $(element).find('xPos').text();
+                item.yPos = $(element).find('yPos').text();
+                // item.distance  = $(element).find('distance').text();
+
+                itemArray.push(item);
+            });
+
+            for (var i = 0; i < itemArray.length; i++)
+            {
+                addMarker(itemArray[i]);
+            }
+
+        }
+    }
+
+    function addMarker(item)
+    {
+        var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h3 id="firstHeading" class="firstHeading"><a href="'+ item.hospUrl +' ">' + item.yadmNm +'</a></h3>'+
+                '<div id="bodyContent">'+
+                '<p>구분   : '+ item.clCdNm + '</p>'+
+                '<p>주소   : '+ item.addr + '</p>'+
+                '<p>연락처 : '+ item.telno +'</p>'+
+                //'<p align="left"><a href="#" data-toggle="modal" data-target="#myModal">자세한 정보 보기</a></p>'+
+                '</div>'+
+                '</div>';
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(item.yPos, item.xPos),
+            map: map,
+            title: item.yadmNm
+        });
+
+        marker.addListener('click', function()
+        {
+            if(infowindow)
+                infowindow.close();
+
+            infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            infowindow.open(map, marker);
+        });
+
+        markers.push(marker);
+    }
+
+    function deleteMarkers()
+    {
+        for (var i = 0; i < markers.length; i++)
+        {
+            markers[i].setMap(null);
+        }
+
+    }
+
+    function basicError()
+    {
+        //$('#result1').val("Failed to retrieve data.");
+    }
+</script>
+</body>
+</html>
