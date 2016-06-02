@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2012726076</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /s>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+</head>
+  <script>
+    var xhttp = new XMLHttpRequest();
+   xhttp.onreadystatechange=function(){
+      if(xhttp.readyState == 4 && xhttp.status == 200)
+      {
+            var ApiData = xhttp.responseText;
+            var data = JSON.parse(xhttp.responseText);
+          
+            // save all api data for this variable
+          
+          
+            for(var i=0;i<5;i++){
+                var movieListResult = data["movieListResult"];
+                var movieList = movieListResult["movieList"];
+                var movieNm = movieList[0]["movieNm"];
+                var openDt = movieList[0]["openDt"];
+                var repNationNm = movieList[0]["repNationNm"];
+                var repGenreNm = movieList[0]["repGenreNm"];
+                document.getElementById("movieNm"+i).innerHTML = movieList[i]["movieNm"];
+                if(movieList[i]["openDt"] =="")
+                    document.getElementById("openDt"+i).innerHTML = "미개봉";
+                else
+                    document.getElementById("openDt"+i).innerHTML = movieList[i]["openDt"];
+                document.getElementById("repNationNm"+i).innerHTML = movieList[i]["repNationNm"];
+                document.getElementById("repGenreNm"+i).innerHTML = movieList[i]["repGenreNm"];
+            }
+          
+            // parse api data with array variable
+      }
+   };
+   xhttp.open("GET","http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=1d203e892fb1c5fef7970c3d56af9bc0",true);
+   xhttp.send();
+   //open with this site address
+      
+    </script>
+    
+<body>
+  <div id="main">
+	<div id="intro">
+        <div class="content_item" style="padding-left:20px;">
+            <h1> 데이터 사용 예시</h1>
+            <h3 id = "movieNm0"></h3>
+            <h3 id = "openDt0"></h3>
+            <h3 id = "repNationNm0"></h3>
+            <h3 id = "repGenreNm0"></h3><br><br>
+            <h3 id = "movieNm1"></h3>
+            <h3 id = "openDt1"></h3>
+            <h3 id = "repNationNm1"></h3>
+            <h3 id = "repGenreNm1"></h3><br><br>
+            <h3 id = "movieNm2"></h3>
+            <h3 id = "openDt2"></h3>
+            <h3 id = "repNationNm2"></h3>
+            <h3 id = "repGenreNm2"></h3><br><br>
+            <h3 id = "movieNm3"></h3>
+            <h3 id = "openDt3"></h3>
+            <h3 id = "repNationNm3"></h3>
+            <h3 id = "repGenreNm3"></h3><br><br>
+            <h3 id = "movieNm4"></h3>
+            <h3 id = "openDt4"></h3>
+            <h3 id = "repNationNm4"></h3>
+            <h3 id = "repGenreNm4"></h3><br><br>
+            
+       	</div>
+     
+	</div>
+        
+  </div>
+
+</body>
+</html>
