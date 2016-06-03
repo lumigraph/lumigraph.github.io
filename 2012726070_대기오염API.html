@@ -1,0 +1,195 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>테스트</title>
+	</head>
+	<body>
+		<h1>측정소 목록 정보</h1>
+		주소 : <input type="text" id="input1">
+		<button type="button" id="myButton1">Request</button>
+		(최대 10개의 데이터만 출력됩니다. 수정가능)<br>
+		ex) 서울 노원구, 경기 부천시, ...
+		<h3>파싱되기 전 데이터</h3>
+		<textarea id='result1_1' cols=100 rows=20></textarea>
+		<h3>파싱된 후 데이터</h3>
+		<textarea id='result1_2' cols=100 rows=20></textarea>
+		
+		<h1>실시간 대기오염 정보(경기 부천시 오정동측정소 기준)</h1>
+
+		<button type="button" id="myButton2">Request</button>
+		<h3>파싱되기 전 데이터</h3>
+		<textarea id='result2_1' cols=100 rows=20></textarea>
+		<h3>파싱된 후 데이터</h3>
+		<textarea id='result2_2' cols=100 rows=20></textarea>
+		
+		<h1>기간별 오염통계 정보</h1>
+		<input type="month" id="input3">
+		(2006년~2014년 사이의 달만 조회가 가능합니다.)<br>
+		<select id='select3'>
+			<option value="도시대기">도시대기</option>
+			<option value="도로변대기">도로변대기</option>
+			<option value="국가배경농도">국가배경농도</option>
+			<option value="교외대기">교외대기</option>
+		</select>
+		<button type="button" id="myButton3">Request</button>
+		(최대 20개의 데이터만 출력됩니다. 수정가능)
+		<h3>파싱되기 전 데이터</h3>
+		<textarea id='result3_1' cols=100 rows=20></textarea>
+		<h3>파싱된 후 데이터</h3>
+		<textarea id='result3_2' cols=100 rows=20></textarea>
+		
+		
+		<script src="https://code.jquery.com/jquery.min.js"></script>
+		<script src="jquery.xdomainajax.js"></script>	
+		<script>
+			function request1() {
+				var addr = $("#input1").val();
+				var endPointUrl = 'http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc/getMsrstnList'; /*URL*/
+				var queryParams = '?' + encodeURIComponent('ServiceKey') + '=' + 'cHOx3gB%2FyFxhTezvo9jF8F88oqK5jvTiNlpdKCywXuDKeDXam9wctqvv30t1ZBbAUT7DzLh3RU9yE0pfzyqUow%3D%3D'; /*Service Key*/
+				queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /*한 페이지 결과 수*/
+				queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*페이지 번호*/
+				queryParams += '&' + encodeURIComponent('addr') + '=' + encodeURIComponent(addr); /*주소*/
+				
+				var url = endPointUrl + queryParams;
+				
+				$.ajax({
+					url		 : url,
+					type	 : "GET",
+					cache	 : false,
+					async 	 : true,
+					success  : success1,
+					error	 : error1
+				});
+			}
+
+			function success1(xmlData) {
+				$("#result1_1").text(xmlData.responseText);
+				
+				var xmlData = $(xmlData.responseText).find("items > item");
+				var str = "";
+
+				$(xmlData).each(function() {
+					str += "측정소 명 : " + $(this).find("stationName").text()	+ "\n"
+						 + "주소 : " + $(this).find("addr").text() + "\n"
+						 + "-------------------------------------------\n";
+				});
+
+				$("#result1_2").text(str);
+			}
+
+			function error1() {
+				$("#result1_1").text("error");
+				$("#result1_2").text("error");
+			}
+
+			function request2() {
+				var endPointUrl = 'http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty'; /*URL*/
+				var queryParams = '?' + encodeURIComponent('ServiceKey') + '=' + 'cHOx3gB%2FyFxhTezvo9jF8F88oqK5jvTiNlpdKCywXuDKeDXam9wctqvv30t1ZBbAUT7DzLh3RU9yE0pfzyqUow%3D%3D'; /*Service Key*/
+				queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /*한 페이지 결과 수*/
+				queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*페이지 번호*/
+				queryParams += '&' + encodeURIComponent('stationName') + '=' + encodeURIComponent('오정동'); /*측정소 명*/
+				queryParams += '&' + encodeURIComponent('dataTerm') + '=' + encodeURIComponent('DAILY'); /*데이터 기간*/
+				queryParams += '&' + encodeURIComponent('ver') + '=' + encodeURIComponent('1.2');
+				
+				var url = endPointUrl + queryParams;
+				
+				$.ajax({
+					url		 : url,
+					type	 : "GET",
+					cache	 : false,
+					async 	 : true,
+					success  : success2,
+					error	 : error2
+				});
+			}
+
+			function success2(xmlData) {
+				$("#result2_1").text(xmlData.responseText);
+				
+				var xmlData = $(xmlData.responseText).find("item");
+				var str = "";
+
+				$(xmlData).each(function() {
+					str += "측정 일시 : " + $(this).find("dataTime").text() + "\n"
+						 + "측정망 정보 : " + $(this).find("mangName").text() + "\n" 
+						 + "아황산가스 농도 : " + $(this).find("so2Value").text() + "\n"
+						 + "일산화탄소 농도 : " + $(this).find("coValue").text() + "\n"
+						 + "오존 농도 : " + $(this).find("o3Value").text() + "\n"
+						 + "이산화질소 농도 : " + $(this).find("no2Value").text() + "\n"
+						 + "미세먼지 농도 : " + $(this).find("pm10Value").text() + "\n"
+						 + "초미세먼지 농도 : " + $(this).find("pm25Value").text() + "\n"
+						 + "통합대기환경지수 : " + $(this).find("khaiGrade").text() + "\n"
+						 + "-------------------------------------------\n";
+				});
+
+				$("#result2_2").text(str);
+			}
+
+			function error2() {
+				$("#result2_1").text("error");
+				$("#result2_2").text("error");
+			}
+
+			function request3() {
+				var mang = $("#select3 option:selected").text();
+				var month = $("#input3").val();
+				var endPointUrl = 'http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnStatsSvc/getDatePollutnStatInfo'; /*URL*/
+				var queryParams = '?' + encodeURIComponent('ServiceKey') + '=' + 'cHOx3gB%2FyFxhTezvo9jF8F88oqK5jvTiNlpdKCywXuDKeDXam9wctqvv30t1ZBbAUT7DzLh3RU9yE0pfzyqUow%3D%3D'; /*Service Key*/
+				queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('30'); /*한 페이지 결과 수*/
+				queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*페이지 번호*/
+				queryParams += '&' + encodeURIComponent('searchDataTime') + '=' + encodeURIComponent('2014-01'); /*조회 날짜*/
+				queryParams += '&' + encodeURIComponent('statArticleCondition') + '=' + encodeURIComponent(mang); /*측정망*/
+				
+				var url = endPointUrl + queryParams;
+				
+				$.ajax({
+					url		 : url,
+					type	 : "GET",
+					cache	 : false,
+					async 	 : true,
+					success  : success3,
+					error	 : error3
+				});
+			}
+
+			function success3(xmlData) {
+				$("#result3_1").text(xmlData.responseText);
+				
+				var xmlData = $(xmlData.responseText).find("item");
+				var str = "";
+
+				$(xmlData).each(function() {
+					str += "지자체 명 : " + $(this).find("sidoName").text() + "\n"
+						 + "측정일 : " + $(this).find("dataTime").text() + "\n"
+						 + "아황산가스 평균 : " + $(this).find("so2Avg").text() + "\n"
+						 + "아황산가스 최고 : " + $(this).find("so2Max").text() + "\n"
+						 + "아황산가스 최저 : " + $(this).find("so2Min").text() + "\n"
+						 + "일산화탄소 평균 : " + $(this).find("coAvg").text() + "\n"
+						 + "일산화탄소 최고 : " + $(this).find("coMax").text() + "\n"
+						 + "일산화탄소 최저 : " + $(this).find("coMin").text() + "\n"
+						 + "오존 평균 : " + $(this).find("o3Avg").text() + "\n"
+						 + "오존 최고 : " + $(this).find("o3Max").text() + "\n"
+						 + "오존 최저 : " + $(this).find("o3min").text() + "\n"
+						 + "이산화질소 평균 : " + $(this).find("no2Avg").text() + "\n"
+						 + "이산화질소 최고 : " + $(this).find("no2Max").text() + "\n"
+						 + "이산화질소 최저 : " + $(this).find("no2Min").text() + "\n"
+						 + "미세먼지 평균 : " + $(this).find("pm10Avg").text() + "\n"
+						 + "미세먼지 최고 : " + $(this).find("pm10Max").text() + "\n"
+						 + "미세먼지 최저 : " + $(this).find("pm10Min").text() + "\n"
+						 + "-------------------------------------------\n";
+				});
+
+				$("#result3_2").text(str);
+			}
+
+			function error3() {
+				$("#result3_1").text("error");
+				$("#result3_2").text("error");
+			}
+
+			$("#myButton1").click(request1);
+			$("#myButton2").click(request2);
+			$("#myButton3").click(request3);
+		</script>
+	</body>
+</html>
