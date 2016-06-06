@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+//크롬 사용 자료이며. 반드시 access-control-allow-origin chrome 으로 검색해서 나오는 확장 프로그램을 통해 에러를 해결해야한다.
+//깔았는데 안된다면 일단 오른쪽 위의 확장프로그램 아이콘을 누르고 enable cross-~~~ 스위치버튼을 껐다 다시켜보자.
+//이는 에러를 해결하기위한 임시땜빵일 뿐이며. 근본적인 해결책은 서버에서 에러에 대한 허가를 내려주는 수 밖에 없다. 
     <meta charset="EUC-KR">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
     <style>
@@ -326,119 +329,6 @@ daum.maps.event.addListener(map, 'click', function(mouseEvent) {
            
 
 		   //여기까지 스크립트 수정금지.
-		   
-		   
-			var midNumber;//기상청 주소 파싱용 변수들.
-			var leafNumber;
-			//http://www.kma.go.kr/wid/queryDFS.jsp?gridx=66&gridy=123
-			
-			/*
-			var xhrTop = new XMLHttpRequest();
-			var xhrMid = new XMLHttpRequest();
-			var xhrLeaf = new XMLHttpRequest();
-			var asyncProc = true;
-			if (asyncProc) 
-				xhrTop.onreadystatechange = function () { 
-				if (this.readyState == 4) 
-				{
-					asyncProc = false;
-				}			
-			}
-			var xhrMid = new XMLHttpRequest();
-			asyncProc = true;
-			if (asyncProc) 
-				xhrMid.onreadystatechange = function () { 
-				if (this.readyState == 4) 
-				{
-					asyncProc = false;
-				}			
-			}
-			var xhrLeaf = new XMLHttpRequest();
-			asyncProc = true;
-			if (asyncProc) 
-				xhrLeaf.onreadystatechange = function () { 
-				if (this.readyState == 4) 
-				{
-					asyncProc = false;
-				}			
-			}
-			xhrTop.open('GET', "http://www.kma.go.kr/DFSROOT/POINT/DATA/top.json.txt", false);
-			xhrTop.send();
-			var top = result[0].jibunAddress.name.split(" ")[0];
-			
-			
-						var topObj = xhrTop.responseText;
-						//topObj = topObj.substring(0, topObj.indexOf("</body>"));
-						//topObj = topObj.substring(topObj.indexOf("<body>") + 6);
-						topObj = JSON.stringify(topObj);
-						topObj = JSON.parse(topObj);
-						topObj = eval(topObj);
-						top = top.replace('서울' , '서울특별시');
-						top = top.replace('경기' , '경기도');
-						top = top.replace('강원' , '강원도');
-						top = top.replace('충북' , '충청북도');
-						top = top.replace('충남' , '충청남도');
-						top = top.replace('경북' , '경상북도');
-						top = top.replace('경남' , '경상남도');
-						top = top.replace('전북' , '전라북도');
-						top = top.replace('전남' , '전라남도');
-						top = top.replace('대전' , '대전광역시');
-						top = top.replace('부산' , '부산광역시');
-						top = top.replace('대구' , '대구광역시');
-						top = top.replace('광주' , '광주광역시');
-						top = top.replace('울산' , '울산광역시');
-						top = top.replace('인천' , '인천광역시');
-
-						for (var i = 0; i < topObj.length; ++i) {
-							var s = topObj[i].value;
-							if (s == top) {
-								midNumber = topObj[i].code;
-							}
-						}
-			midNumber = "http://www.kma.go.kr/DFSROOT/POINT/DATA/mdl." + midNumber + ".json.txt";
-			xhrMid.open('GET', midNumber, false);
-			xhrMid.send();
-			var mid = result[0].jibunAddress.name.split(" ")[1];
-			
-			
-						var midObj = xhrMid.responseText;
-						//midObj = midObj.substring(0, midObj.indexOf("</body>"));
-						//midObj = midObj.substring(midObj.indexOf("<body>") + 6);
-						midObj = JSON.stringify(midObj);
-						midObj = JSON.parse(midObj);
-						midObj = eval(midObj);
-
-						for (var i = 0; i < midObj.length; ++i) {
-							var s = midObj[i].value;
-							if (s == mid) {
-								leafNumber = midObj[i].code;
-							}
-						}
-						
-			leafNumber = "http://www.kma.go.kr/DFSROOT/POINT/DATA/leaf." + leafNumber + ".json.txt";
-			xhrLeaf.open('GET', leafNumber, false);
-			xhrLeaf.send();
-			var leaf = result[0].jibunAddress.name.split(" ")[2];
-			
-			
-			//http://www.kma.go.kr/wid/queryDFS.jsp?gridx=66&gridy=123
-			//http://www.kma.go.kr/weather/forecast/digital_forecast.jsp?x=66&y=123
-			
-						var leafObj = xhrLeaf.responseText;
-						//leafObj = leafObj.substring(0, leafObj.indexOf("</body>"));
-						//leafObj = leafObj.substring(leafObj.indexOf("<body>") + 6);
-						leafObj = JSON.stringify(leafObj);
-						leafObj = JSON.parse(leafObj);
-						leafObj = eval(leafObj);
-
-						for (var i = 0; i < leafObj.length; ++i) {
-							var s = leafObj[i].value;
-							if (s == leaf) {
-								leafNumber = leafObj[i].code;
-							}
-						}
-				*/
-				
 				
 			var location = dfs_xy_conv("toXY",mouseEvent.latLng.getLat(),mouseEvent.latLng.getLng());//좌표변환을 통해 기상청에서 받아들이는 좌표로 변환.
 			var iframeurl = 'http://www.kma.go.kr/weather/forecast/digital_forecast.jsp?x=' + location.nx +'&y=' + location.ny;//iframe 으로 내보내기 위한 코드.
@@ -471,11 +361,10 @@ daum.maps.event.addListener(map, 'click', function(mouseEvent) {
 			            var content = '<div class="bAddr">' +
                             '<span class="title">법정동 주소정보</span>' + 
                             detailAddr + txt +//원하는 변수를 넣은 문자열이 출력된다.
-                        '</div>' + 
-						'<div class="bAddr">' + '<iframe src="' + iframeurl + '"></iframe>' +'</div>';
+                        '</div>' +  '<div class="bAddr">' + '<iframe src="' + iframeurl + '"></iframe>' +'</div>';
 						
 
-			
+	//별도의 주석이 있기 전까지 수정금지.		
 			// 마커를 클릭한 위치에 표시합니다 
             marker2.setPosition(mouseEvent.latLng);
             marker2.setMap(map);
@@ -490,7 +379,7 @@ daum.maps.event.addListener(map, 'click', function(mouseEvent) {
 
 
 
-//별도의 주석이 있기 전까지 수정금지.
+
 // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
 daum.maps.event.addListener(map, 'idle', function() {
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
