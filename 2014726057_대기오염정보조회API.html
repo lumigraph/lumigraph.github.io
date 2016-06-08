@@ -1,0 +1,887 @@
+<html>
+	<head>
+
+		<title> In-Air</title>
+
+		<meta charset="utf-8">
+		<style type="text/css">
+ @import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+      .nbs {font-family: 'Nanum Brush Script';}
+
+#absoluteNW {
+    position: absolute;
+    top: 379px;
+    left: 297px;
+}
+#absoluteDB {
+    position: absolute;
+    top: 350px;
+    left: 255px;
+}
+#absoluteKB {
+    position: absolute;
+    top: 382px;
+    left: 245px;
+}
+#absoluteSB {
+    position: absolute;
+    top: 413px;
+    left: 245px;
+}
+#absoluteJR {
+    position: absolute;
+    top: 430px;
+    left: 304px;
+}
+#absoluteDDM {
+    position: absolute;
+    top: 445px;
+    left: 272px;
+}
+#absoluteJongR {
+    position: absolute;
+    top: 440px;
+    left: 230px;
+}
+#absoluteEP {
+    position: absolute;
+    top: 405px;
+    left: 188px;
+}
+#absoluteSDM {
+    position: absolute;
+    top: 447px;
+    left: 185px;
+}
+#absoluteMP {
+    position: absolute;
+    top: 465px;
+    left: 180px;
+}
+#absoluteYS {
+    position: absolute;
+    top: 488px;
+    left: 220px;
+}
+#absoluteSD {
+    position: absolute;
+    top: 470px;
+    left: 265px;
+}
+#absoluteJong {
+    position: absolute;
+    top: 460px;
+    left: 240px;
+}
+#absoluteKJ {
+    position: absolute;
+    top: 482px;
+    left: 290px;
+}
+#absoluteKS {
+    position: absolute;
+    top: 460px;
+    left: 110px;
+}
+#absoluteYC {
+    position: absolute;
+    top: 508px;
+    left: 138px;
+}
+#absoluteYDP {
+    position: absolute;
+    top: 508px;
+    left: 174px;
+}
+#absoluteGR {
+    position: absolute;
+    top: 532px;
+    left: 135px;
+}
+#absoluteKC {
+    position: absolute;
+    top: 552px;
+    left: 163px;
+}
+#absoluteDJ {
+    position: absolute;
+    top: 530px;
+    left: 200px;
+}
+#absoluteKY {
+    position: absolute;
+    top: 555px;
+    left: 200px;
+}
+#absoluteSC {
+    position: absolute;
+    top: 555px;
+    left: 245px;
+}
+#absoluteKN {
+    position: absolute;
+    top: 528px;
+    left: 272px;
+}
+#absoluteSP {
+    position: absolute;
+    top: 520px;
+    left: 315px;
+}
+#absoluteKD {
+    position: absolute;
+    top: 470px;
+    left: 345px;
+}
+body {
+    background-color: #4C4C4C;
+}
+#h1{
+		text-align: center;
+		color: gray;
+	    font-size: 400%;
+	    letter-spacing:-5px;
+		}
+.head_color1{
+ 		color: white;
+	}
+.button2 {
+   background-color: #D2D2D0;
+    color: black; 
+    border: 0px solid #D2D2D0;;
+    font-size: 4px;
+
+}
+.button2:hover {
+    background-color: #D2D2D0;;
+    color: white;
+}
+#result{
+	 position: absolute;
+    top: 330px;
+    left: 430px;
+    font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 20px;
+}
+#result2{
+	 position: absolute;
+    top: 330px;
+    left: 680px;
+    font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 20px;
+}
+#result3{
+	 position: absolute;
+    top: 570px;
+    left: 430px;
+    font-family: 'Nanum Brush Script';
+    color: #AB4A12;
+    font-size: 30px;
+}
+#result4{
+	 position: absolute;
+    top: 620px;
+    left: 430px;
+    font-family: 'Nanum Brush Script';
+    color: #AB4A12;
+    font-size: 30px;
+}
+#welcomeSay{
+	position: absolute;
+    top: 330px;
+    left: 660px;
+    font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 30px;
+}
+#dailyResult1{
+	font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 15px;
+    position: relative;
+    left: 40px;
+    float: left;
+}
+#dailyResult2{
+	font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 15px;
+    position: relative;
+    left: 80px;
+    float: left;
+}
+#dailyResult3{
+	font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 15px;
+    position: relative;
+    left: 100px;
+    float: left;
+}
+#dailyResult4{
+	font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 15px;
+    position: relative;
+    left: 120px;
+    float: left;
+}
+#dailyResult5{
+	font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 15px;
+    position: relative;
+    left: 140px;
+    float: left;
+}
+#dailyResult6{
+	font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 15px;
+    position: relative;
+    left: 160px;
+    float: left;
+}
+#dailyResult7{
+	font-family: 'Nanum Brush Script';
+    color: white;
+    font-size: 15px;
+    position: relative;
+    left: 180px;
+    float: left;
+}
+#selectLocation{
+	position: absolute;
+	top: 320px;
+    left: 430px;
+	font-family: 'Nanum Brush Script';
+    color: #FBE20F;
+    font-size: 40px;
+}
+#selectLocation2{
+	position: absolute;
+	top: 310px;
+    left: 460px;
+	font-family: 'Nanum Brush Script';
+    color: #FBE20F;
+    font-size: 40px;
+}
+#section1{
+	position: absolute;
+    top: 647px;
+    left: 80px;
+	font-family: 'Nanum Brush Script';
+    color: #B2EBF4;
+    font-size: 30px;
+}
+.button {
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+.button:hover {
+    background-color: white;
+    color: black;
+}
+#button1Click{
+	 display:none;
+}
+#button2Click{
+	 display:none;
+}
+#button3Click{
+	 display:none;
+}
+#button4Click{
+	 display:none;
+}
+#totalCountBox{
+	position: absolute; 
+	top: 300px;
+	left: 300px;
+    font-family: 'Nanum Brush Script';
+    color: #FBE20F;
+    font-size: 30px;
+}
+#totalCountBox2{
+	position: absolute; 
+	top: 320px;
+	left: 300px;
+    font-family: 'Nanum Brush Script';
+    color: black;
+    font-size: 20px;
+}
+#cityInfo{
+	position: absolute; 
+	top: 340px;
+	left: 450px;
+    font-family: 'Nanum Brush Script';
+    color: black;
+    font-size: 20px;
+}
+.pollute{
+	position: absolute; 
+	top: 240px;
+	left: 20px;
+	font-family: 'Nanum Brush Script';
+    color: #FBE20F;
+    font-size: 40px;
+    margin-left: 200px;
+}
+.pollute2{
+	font-family: 'Nanum Brush Script';
+    color: #FBE20F;
+    font-size: 40px;
+    margin-left: 200px;
+}
+hr { 
+	border-top:1px solid #9C9C9C; border-bottom:1px solid black; 
+	margin-right: 200px; margin-left: 200px;
+}
+
+		</style>
+		<script type="text/javascript" src="lib/jquery-1.12.1.min.js"></script>
+		<script type="text/javascript" src="lib/xml2json.js"></script>
+		<script type="text/javascript" src="lib/jquery.xdomainajax.js"></script>
+		<!-- <script type="text/javascript" src="js/main.js"></script> -->
+		<script type="text/javascript">
+
+		var end_point_url = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty;"
+		var authentication_key = "OzwumoMNMbNHNJmBJlrmZPKCqjwjuAnntjnyu4bnQZGBMFiUZ6ca14te5UQ423dJomFK00cTjchSVBCl%2FoE4bQ%3D%3D";
+		var stationName = "";
+		var dataTerm = "DAILY";
+		var end_point_url_2 = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getUnityAirEnvrnIdexSnstiveAboveMsrstnList;"
+		var end_point_url_3 = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty;"
+
+function showhide(idMyDiv){
+     var objDiv = document.getElementById(idMyDiv);
+     if(objDiv==button1Click)
+ {
+ 	 	intro.style.display = "none";
+ 	 	button2Click.style.display = "none";
+   	 	button4Click.style.display = "none";
+   	 	button3Click.style.display = "none"
+		objDiv.style.display = "block";
+		$(selectLocation2).html("");
+		$(cityInfo).html("");
+		$(result4).html("");
+		$(cityInfo).html("");
+ }	
+   else if(objDiv==button2Click)
+ {
+ 	 	intro.style.display = "none";
+ 		button1Click.style.display = "none";
+ 	 	button3Click.style.display = "none";
+ 	 	button4Click.style.display = "none";
+ 		objDiv.style.display = "block";
+		$(selectLocation2).html("");
+		$(result4).html("");
+		$(cityInfo).html("");
+
+ }	
+   else if(objDiv==button3Click)
+ {
+ 	intro.style.display = "none";
+ 	button1Click.style.display = "none";
+ 	button2Click.style.display = "none";
+ 	button4Click.style.display = "none";
+ 	objDiv.style.display = "block";
+ 	$(selectLocation).html("");
+	$(result).html("");
+	$(result2).html("");
+	$(result3).html("");
+	$(result4).html("");
+	$(dailyResult1).html("");
+	$(dailyResult2).html("");
+	$(dailyResult3).html("");
+	$(dailyResult4).html("");
+	$(dailyResult5).html("");
+	$(dailyResult6).html("");
+	$(dailyResult7).html("");
+	$(section1).html("");
+ }	
+ else if(objDiv==button4Click)
+ {
+ 	intro.style.display = "none";
+ 	button1Click.style.display = "none";
+ 	button2Click.style.display = "none";
+ 	button3Click.style.display = "none";
+ 	objDiv.style.display = "block";
+	$(selectLocation2).html("");
+	$(selectLocation).html("");
+	$(result).html("");
+	$(result2).html("");
+	$(result3).html("");
+	$(result4).html("");
+	$(dailyResult1).html("");
+	$(dailyResult2).html("");
+	$(dailyResult3).html("");
+	$(dailyResult4).html("");
+	$(dailyResult5).html("");
+	$(dailyResult6).html("");
+	$(dailyResult7).html("");
+	$(section1).html("");
+	$(cityInfo).html("");
+ }
+
+     }
+
+     function press3(City_id)
+	{
+		stationName="";	
+		var cityName = City_id;
+		alert(cityName);
+
+		var queryParams = '?' + ('ServiceKey=' + authentication_key);
+		queryParams += '&' + ('numOfRows') + '=' + ('10');
+		queryParams += '&' + ('pageNo') + '=' + ('1');
+		queryParams += '&' + ('sidoName') + '=' + (cityName);
+
+
+		$.ajax({
+			type	 : "GET",
+			url		 : end_point_url_3 + queryParams,
+			dataType : "xml",
+			async 	 : true,
+			success  : response_parse,
+			error	 : error
+		});
+
+		function response_parse(data)
+		{
+			var $xml;
+			var index =0;
+			$("#box1").text(data.responseText);
+
+			var xmlData = $(data.responseText).find("item");
+			var cityInAir = [];
+			
+			// IE에서 동작 중인가?
+			if(navigator.appName == "Microsoft Internet Explorer") {
+				// IE에서 xml 텍스트 읽는 법
+				// 출처: http://lazygyu.tistory.com/12
+				var xml = new ActiveXObject('Microsoft.XMLDOM');
+				xml.async = false;
+				xml.loadXML(data.responseText);
+
+				$xml = $(xml);
+
+			// IE에선 $("title").text("~~") 가 동작하지 않음.
+			// 출처: http://jacobyou.tistory.com/47
+				
+			} else {
+			// IE가 아니면 그냥 하면 된다.
+				$xml = $(data.responseText);
+			}
+
+
+$(xmlData).each(function() {
+  cityInAir[index] = "<br></br>측정소 명: " + $(this).find("stationName").text() + " &emsp;측정소 일시: "+ $(this).find("dataTime").text() + " &emsp;미세먼지 농도: "+ $(this).find("pm10Value").text() + "&emsp;일산화탄소 농도:"+ $(this).find("coValue").text() + "<br></br> => &ensp;통합대기환경지수	" + $(this).find("khaiGrade").text();
+
+   index++;
+});
+			$(selectLocation).html("");
+			$(result).html("");
+			$(result2).html("");
+			$(result3).html("");
+			$(result4).html("");
+			$(dailyResult1).html("");
+			$(dailyResult2).html("");
+			$(dailyResult3).html("");
+			$(dailyResult4).html("");
+			$(dailyResult5).html("");
+			$(dailyResult6).html("");
+			$(dailyResult7).html("");
+			$(section1).html("");
+			$(selectLocation2).html(cityName);
+			$(cityInfo).html(cityInAir);
+		}
+	
+		function error (xml)
+		{
+			$("#box1").val("오류");
+		}
+		
+	}
+
+		function press2()
+	
+	{
+		var queryParams = '?' + ('ServiceKey=' + authentication_key);
+		queryParams += '&' + ('numOfRows') + '=' + ('10');
+		queryParams += '&' + ('pageNo') + '=' + ('1');
+
+
+		$.ajax({
+			type	 : "GET",
+			url		 : end_point_url_2 + queryParams,
+			dataType : "xml",
+			async 	 : true,
+			success  : response_parse,
+			error	 : error
+		});
+
+		function response_parse(data)
+		{
+			var $xml;
+			var index =0;
+			$("#box1").text(data.responseText);
+
+			var xmlData = $(data.responseText).find("item");
+			var badLocation = [];
+			
+			// IE에서 동작 중인가?
+			if(navigator.appName == "Microsoft Internet Explorer") {
+				// IE에서 xml 텍스트 읽는 법
+				// 출처: http://lazygyu.tistory.com/12
+				var xml = new ActiveXObject('Microsoft.XMLDOM');
+				xml.async = false;
+				xml.loadXML(data.responseText);
+
+				$xml = $(xml);
+
+			// IE에선 $("title").text("~~") 가 동작하지 않음.
+			// 출처: http://jacobyou.tistory.com/47
+				
+			} else {
+			// IE가 아니면 그냥 하면 된다.
+				$xml = $(data.responseText);
+			}
+
+				var totalCount = "오늘의 위험지역은 총 "+$xml.find("totalCount").text()+"곳 입니다.";
+
+$(xmlData).each(function() {
+  badLocation[index] = "<br></br>측정소 명: " + $(this).find("stationName").text() + "<br></br>측정소 주소: "+ $(this).find("addr").text();
+
+   index++;
+});
+		
+			$(selectLocation).html("");
+			$(result).html("");
+			$(result2).html("");
+			$(result3).html("");
+			$(dailyResult1).html("");
+			$(dailyResult2).html("");
+			$(dailyResult3).html("");
+			$(dailyResult4).html("");
+			$(dailyResult5).html("");
+			$(dailyResult6).html("");
+			$(dailyResult7).html("");
+			$(section1).html("");
+
+			$(totalCountBox).html(totalCount);
+			$(totalCountBox2).html(badLocation);
+
+		}
+	
+		function error (xml)
+		{
+			$("#box1").val("오류");
+		}
+		
+	}
+	//-----------------------------------------------------------------------------------------
+
+	function press1(location_id)
+	{
+	
+		stationName = "";
+		stationName = location_id;
+		alert(stationName);
+
+		var queryParams = '?' + ('ServiceKey=' + authentication_key);
+		queryParams += '&' + ('numOfRows') + '=' + ('10');
+		queryParams += '&' + ('pageNo') + '=' + ('1');
+		queryParams += '&' + ('stationName') + '=' + (stationName);
+		queryParams += '&' + ('dataTerm') + '=' + (dataTerm);
+
+
+		$.ajax({
+			type	 : "GET",
+			url		 : end_point_url + queryParams,
+			dataType : "xml",
+			async 	 : true,
+			success  : response_parse,
+			error	 : error
+		});
+
+		function response_parse(data)
+		{
+			var $xml;
+			var index =0;
+			$("#box1").text(data.responseText);
+
+			var xmlData = $(data.responseText).find("item");
+			var boxhtml = [];
+			var boxhtml2 = [];
+			var boxhtml3 = [];
+			var boxhtml4 = [];
+			// IE에서 동작 중인가?
+			if(navigator.appName == "Microsoft Internet Explorer") {
+				// IE에서 xml 텍스트 읽는 법
+				// 출처: http://lazygyu.tistory.com/12
+				var xml = new ActiveXObject('Microsoft.XMLDOM');
+				xml.async = false;
+				xml.loadXML(data.responseText);
+
+				$xml = $(xml);
+
+			// IE에선 $("title").text("~~") 가 동작하지 않음.
+			// 출처: http://jacobyou.tistory.com/47
+			} else {
+			// IE가 아니면 그냥 하면 된다.
+				$xml = $(data.responseText);
+
+			}
+
+$(xmlData).each(function() {
+  boxhtml[index] = "<br></br>측정일은: " + $(this).find("dataTime").text() + "<br></br>미세먼지(PM10) 지수는: "+ $(this).find("pm10Grade").text() + "<br></br>미세먼지(PM10) 농도는: "+ $(this).find("pm10Value").text() + "<br></br> 이산화질소 지수는: "+ $(this).find("no2Grade").text();
+
+ boxhtml2[index] = "<br></br>일산화탄소의 농도는: "+ $(this).find("coValue").text() + "<br></br>이산화탄소의 농도는: " +  $(this).find("no2Value").text() + "<br></br>오존의 농도는: " +  $(this).find("o3Value").text() + "<br></br>아황산가스의 농도는: " +  $(this).find("so2Value").text()+ "<br></br><br></br>";
+
+ boxhtml4[index] = $(this).find("khaiGrade").text();
+
+   boxhtml3[index] = "=> "+stationName +"의 통합대기환경지수 농도는 "+ $(this).find("khaiGrade").text() +" 입니다.";
+   index++;
+});
+
+if(boxhtml4[0] < 3){
+	$(result4).html("- 오늘은 공기가 아주 깨끗합니다.");
+}
+else if(boxhtml4[0] < 6){
+	$(result4).html("- 마스크를 착용해 주세요.");
+
+}
+else{
+	$(result4).html("- 야외 활동을 자제해 주세요. 공기가 아주 나빠요!!");
+}
+		
+
+			$(selectLocation).html(stationName);
+			$(result).html(boxhtml[0]);
+			$(result2).html(boxhtml2[0]);
+			$(result3).html(boxhtml3[0]);
+			$(dailyResult1).html(boxhtml[1]+boxhtml2[1]);
+			$(dailyResult2).html(boxhtml[2]+boxhtml2[2]);
+			$(dailyResult3).html(boxhtml[3]+boxhtml2[3]);
+			$(dailyResult4).html(boxhtml[4]+boxhtml2[4]);
+			$(dailyResult5).html(boxhtml[5]+boxhtml2[5]);
+			$(dailyResult6).html(boxhtml[6]+boxhtml2[6]);
+			$(dailyResult7).html(boxhtml[7]+boxhtml2[7]);
+
+			$(section1).html("시간별 결과");
+			$(welcomeSay).html("");
+		}
+	
+		function error (xml)
+		{
+			$("#box1").val("오류");
+		}
+		
+	}
+			
+
+$(function load() {
+	var queryParams = '?' + ('ServiceKey=' + authentication_key);
+	queryParams += '&' + ('numOfRows') + '=' + ('1');
+	queryParams += '&' + ('pageNo') + '=' + ('1');
+	queryParams += '&' + ('stationName') + '=' + (stationName);
+	queryParams += '&' + ('dataTerm') + '=' + ('DAILY');
+
+
+	$.ajax({
+		type	 : "GET",
+		url		 : end_point_url + queryParams,
+		dataType : "xml",
+		async 	 : true,
+		success  : response_parse,
+		error	 : error
+	});
+
+
+	
+
+	function response_parse(data)
+	{
+		var $xml;
+
+		$("#box1").text(data.responseText);
+
+		// IE에서 동작 중인가?
+		if(navigator.appName == "Microsoft Internet Explorer") {
+			// IE에서 xml 텍스트 읽는 법
+			// 출처: http://lazygyu.tistory.com/12
+			var xml = new ActiveXObject('Microsoft.XMLDOM');
+			xml.async = false;
+			xml.loadXML(data.responseText);
+
+			$xml = $(xml);
+
+			// IE에선 $("title").text("~~") 가 동작하지 않음.
+			// 출처: http://jacobyou.tistory.com/47
+		} else {
+			// IE가 아니면 그냥 하면 된다.
+			$xml = $(data.responseText);
+
+		}
+
+		var welcome = "환영합니다" + "<br></br>원하는 버튼을 눌러주세요."
+		$(welcomeSay).html(welcome);
+
+	}
+	
+	function error (xml)
+	{
+		$("#box1").val("오류");
+	}
+
+
+});
+
+
+		</script>
+	</head>
+	<body>
+	<br>
+<div id="h1">
+<p>In <span class="head_color1">A</span>ir.</p>
+</div>
+<button class="button" onClick="showhide('button1Click'); return false;" style="position: absolute; top: 200px; left: 260px;">서울 대기정보</button>
+<button class="button" onClick="showhide('button2Click'); press2(); return false;" style="position: absolute; top: 200px; left: 665px;">위험지역</button>
+<button class="button" onClick="showhide('button3Click'); return false;"style="position: absolute; top: 200px; left: 462px;">전국 대기정보</button>
+<button class="button" onClick="showhide('button4Click');" style="position: absolute; top: 200px; left: 832px;">미세먼지란</button>
+	<div id="button1Click">
+		<img src="seoulMap.png" alt="seoulMap" style="width:300px;height:300px; margin-left: 80px; margin-top: 70px;">
+		<div id="absoluteNW"><button class="button2" onClick="press1(this.id);" id="노원구">노원구</button></div>	
+		<div id="absoluteDB"><button class="button2" onClick="press1(this.id);" id="도봉구">도봉구</button></div>	
+		<div id="absoluteKB"><button class="button2" onClick="press1(this.id);" id="강북구">강북구</button></div>
+		<div id="absoluteSB"><button class="button2" onClick="press1(this.id);" id="성북구">성북구</button></div>	
+		<div id="absoluteJR"><button class="button2" onClick="press1(this.id);" id="중랑구">중랑구</button></div>	
+		<div id="absoluteDDM"><button class="button2" onClick="press1(this.id);" id="동대문구">동대문구</button></div>
+		<div id="absoluteJongR"><button class="button2" onClick="press1(this.id);" id="종로구">종로구</button></div>
+		<div id="absoluteEP"><button class="button2" onClick="press1(this.id);" id="은평구">은평구</button></div>
+		<div id="absoluteSDM"><button class="button2" onClick="press1(this.id);" id="서대문구">서대문구</button></div>
+		<div id="absoluteMP"><button class="button2" onClick="press1(this.id);" id="마포구">마포구</button></div>
+		<div id="absoluteYS"><button class="button2" onClick="press1(this.id);" id="용산구">용산구</button></div>
+		<div id="absoluteSD"><button class="button2" onClick="press1(this.id);" id="성동구">성동구</button></div>
+		<div id="absoluteJong"><button class="button2" onClick="press1(this.id);" id="중구">중구</button></div>
+		<div id="absoluteKJ"><button class="button2" onClick="press1(this.id);" id="광진구">광진구</button></div>
+		<div id="absoluteKS"><button class="button2" onClick="press1(this.id);" id="강서구">강서구</button></div>
+		<div id="absoluteYC"><button class="button2" onClick="press1(this.id);" id="양천구">양천구</button></div>
+		<div id="absoluteGR"><button class="button2" onClick="press1(this.id);" id="구로구">구로구</button></div>
+		<div id="absoluteYDP"><button class="button2" onClick="press1(this.id);" id="영등포구">영등포구</button></div>
+		<div id="absoluteKC"><button class="button2" onClick="press1(this.id);" id="금천구">금천구</button></div>
+		<div id="absoluteDJ"><button class="button2" onClick="press1(this.id);" id="동작구">동작구</button></div>
+		<div id="absoluteKY"><button class="button2" onClick="press1(this.id);" id="관악구">관악구</button></div>
+		<div id="absoluteSC"><button class="button2" onClick="press1(this.id);" id="서초구">서초구</button></div>
+		<div id="absoluteKN"><button class="button2" onClick="press1(this.id);" id="강남구">강남구</button></div>
+		<div id="absoluteSP"><button class="button2" onClick="press1(this.id);" id="송파구">송파구</button></div>
+		<div id="absoluteKD"><button class="button2" onClick="press1(this.id);" id="강동구">강동구</button></div>	
+	</div>
+<div id="selectLocation"></div>
+<div id="result"></div>
+<div id="result2"></div>
+<div id="result3"></div>
+<div id="result4"></div>
+<div id="button2Click">
+		<div id="totalCountBox"></div>
+		<div id="totalCountBox2"></div>
+	</div>
+
+	<div id="intro">
+		<img src="18.png" id="img1" style="width:200px;height:200px;position: absolute; top: 320px; left: 430px;">
+		<div id="welcomeSay"></div>
+	</div>
+<br>
+<br>
+<br>
+<div id="section1"></div>
+<div id = "dailyResult1"> </div>
+<div id = "dailyResult2"> </div>
+<div id = "dailyResult3"> </div>
+<div id = "dailyResult4"> </div>
+<div id = "dailyResult5"> </div>
+<div id = "dailyResult6"> </div>
+<div id = "dailyResult7"> </div>
+<div id = "dailyResult8"> </div>
+
+</br>
+</br>
+	<div id="selectLocation2"></div>
+	<div id="cityInfo"></div>
+	<div id="button3Click">
+		<img src="koreaMap.png" style="width:200px;height:350px; position: absolute; top: 300px; left: 250px;"> 
+		<button class="button2" style="position: absolute; top: 360px; left: 310px;"onClick="press3(this.id);" id="서울">서울</button>
+		<button class="button2" style="position: absolute; top: 370px; left: 290px;"onClick="press3(this.id);" id="인천">인천</button>
+		<button class="button2" style="position: absolute; top: 360px; left: 350px;"onClick="press3(this.id);" id="강원도">강원도</button>
+		<button class="button2" style="position: absolute; top: 440px; left: 370px;"onClick="press3(this.id);" id="경상북도">경상북도</button>
+		<button class="button2" style="position: absolute; top: 410px; left: 330px;"onClick="press3(this.id);" id="충청북도">충청북도</button>
+		<button class="button2" style="position: absolute; top: 420px; left: 280px;"onClick="press3(this.id);" id="충청남도">충청남도</button>
+		<button class="button2" style="position: absolute; top: 440px; left: 310px;"onClick="press3(this.id);" id="대전">대전</button>
+		<button class="button2" style="position: absolute; top: 480px; left: 290px;"onClick="press3(this.id);" id="전라북도">전라북도</button>
+		<button class="button2" style="position: absolute; top: 530px; left: 290px;"onClick="press3(this.id);" id="전라남도">전라남도</button>
+		<button class="button2" style="position: absolute; top: 510px; left: 300px;"onClick="press3(this.id);" id="광주">광주</button>
+		<button class="button2" style="position: absolute; top: 495px; left: 340px;"onClick="press3(this.id);" id="경상남도">경상남도</button>
+		<button class="button2" style="position: absolute; top: 510px; left: 380px;"onClick="press3(this.id);" id="부산">부산</button>
+		<button class="button2" style="position: absolute; top: 490px; left: 400px;"onClick="press3(this.id);" id="울산">울산</button>
+		<button class="button2" style="position: absolute; top: 470px; left: 370px;"onClick="press3(this.id);" id="대구">대구</button>
+		<button class="button2" style="position: absolute; top: 390px; left: 300px;"onClick="press3(this.id);" id="경기도">경기도</button>
+	</div>
+	<div id = "button4Click">
+	<p class="pollute">미세먼지 왜 위험한가?</p>
+	<img src="pollutePic.png" style="margin-left: 200px; margin-right: 200px;width: 270px;height: 170px;">
+		<p style="margin-left: 200px; margin-right: 200px;">
+			미세먼지는 여러 가지 복합한 성분을 가진 대기 중 부유 물질이다. 대부분 자동차의 배기가스, 도로 주행과정에서 발생하는 먼지에서 발생한다. 입자의 크기와 화학적 조성이 건강 영향을 결정한다. 미세먼지의 노출은 호흡기 및 심혈관계 질환의 발생과 관련이 있으며 사망률도 증가시키는 것으로 보고되고 있다. 특히, 크기가 10마이크로미터 이하의 작은 먼지 입자들은 폐와 혈중으로 유입될 수 있기 때문에 큰 위협이 된다. 또한 이들은 크기가 매우 작아서 코와 기도를 거쳐 기도 깊숙한 폐포에 도달할 수 있으며, 크기가 작을수록 폐포를 직접 통과해서 혈액을 통해 전신적인 순환을 할 수 있다.
+		</p>
+		<br>
+		<hr/>
+		<p class="pollute2">미세먼지로 인한 몸의 증상은?</p>
+		<p style="margin-left: 200px; margin-right: 200px;">
+			급성 노출 시에는 기도의 자극으로 인한 기침과 호흡 곤란이 발생하며, 천식이 악화되고 부정맥이 발생한다. 만성 노출 시에는 폐기능이 감소하고 만성 기관지염이 증가하고 사망률을 높일 수 있다. 특히, 심장이나 폐질환자, 아이와 노인, 임산부는 미세먼지 노출에 의한 영향이 더 크며, 심지어 건강한 성인이어도 높은 농도에 노출되면 일시적으로 이런 증상들을 경험하게 된다. <br>이러한 증상들은 주로 미세먼지에 의해 세기관지에 염증 반응이 유발됨으로써 발생한다. 또한 기도와 폐에서 박테리아를 불활성화하거나 제거하는 인체의 방어 작용을 방해함으로써 호흡기계 감염을 초래하게 한다. 미세먼지에 의한 심혈관질환의 발생은 산화스트레스 및 염증 반응, 그리고 자율신경계의 장애와 혈액 응고 능력의 변화와 관련 있는 것으로 보고되고 있다.
+		</p>
+		<hr/>
+		<p class="pollute2">특히 주의해야 할 사람은?</p>
+<p style="margin-left: 200px; margin-right: 200px;">
+			<strong>미세먼지와 만성질환</strong>
+			<br>
+미국의 일리노이 지역 거주 노인을 대상으로 한 연구에서 미세먼지 농도가 10ug/m2 증가할 때 심근경색이 있었던 사람은 2.7배, 당뇨병을 가진 사람은 2.0배 사망률이 증가하는 것으로 조사되었고, 우리나라에서 연구에서는 심부전환자가 사망위험이 약 2.5배 높았다. 
+		</p>
+		<br>
+		<p style="margin-left: 200px; margin-right: 200px;">
+			<strong>미세먼지와 어린이</strong>
+			<br>
+미세먼지에 노출된 어린이에서 호흡기계 질환으로 인한 사망률이 증가하였으며, 폐기능이 발달하는 시기에 호흡기가 이런 위험물질에 노출되면 성인이 되어서도 폐 기능에 영향을 주게 된다. 캘리포니아 지역의 학생을 추적 관찰한 결과 이런 오염 물질에 장기간 노출된 어린이는 성인이 되었을 때 폐기능이 낮을 가능성이 4.9배나 높았다. 또한 이런 폐기능 저하는 심혈관계질환과 당뇨병의 발생위험을 증가시키는 것으로 알려져 있다. 대기오염이 기준치 이하로 유지되어도 민감한 어린이에게는 더 심각한 영향을 줄 수 있다. 이와 같은 연구 결과들은 누구나 청정 지역에서 살기를 바라지만 그럴 수 없는 경우가 많기 때문에 환경의학적으로 중요한 과제이다.
+		</p>
+		<br>
+		<p style="margin-left: 200px; margin-right: 200px;">
+			<strong>미세먼지와 가임기 여성</strong>
+			<br>
+미세먼지의 노출은 재태 기간에 비해 작은 체중아의 출산과 관련성이 보고되었고, 2.5마이크로미터보다 작은 초미세먼지의 노출은 저출생 체중아, 조산아, 재태 기간에 비해 작은 체중아를 출산하는 것과 관련이 있다.
+		</p>
+		<br>
+		<hr/>
+		<p class="pollute2">미세먼지 예방법은?</p>
+<ul style="margin-left: 200px; margin-right: 200px;"><li>미세먼지 농도가 높을 때에는 호흡기나 심혈관 질환자, 아이와 노인, 임산부는 외출을 자제해야 한다. 흡입되는 미세먼지는 활동의 강도와 기간에 비례하기 때문에 건강한 성인은 과격한 실외 활동을 최소화 것이 좋다.
+</li>
+<li>
+대개 도로변이 미세먼지 농도가 더 높기 때문에 도로변에서 운동하지 않도록 한다. 	
+</li>
+<li>
+실외 활동 시에 황사마스크를 착용하고, 불가피한 외출 후에는 코와 손을 잘 씻는 것이 좋다. 
+</li>
+<li>창문을 열어 두면 외부에서 유입된 미세먼지로 실내의 미세먼지 농도가 증가하기 때문에 창문을 닫아야 한다. 에어필터나 공기청정기가 도움이 될 수 있다. </li>
+<li>
+	실내에서 흡연을 하거나 촛불을 켜는 것은 미세먼지 농도를 높이는 것이므로 피해야 한다.
+</li></ul> 
+	</div>
+ </body>
+</html>
