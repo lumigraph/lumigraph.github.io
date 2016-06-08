@@ -1,0 +1,620 @@
+<html>
+	<head>
+		<title> 공공데이터 활용 예제 </title>
+		<meta charset="utf-8">
+		<link href='pagecss.css' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="lib/jquery-1.12.1.min.js"></script>
+		<script type="text/javascript" src="lib/xml2json.js"></script>
+		<script type="text/javascript" src="lib/jquery.xdomainajax.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<style>
+		@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+body{
+	background-color:  #E0CC97;
+}
+
+h1{
+	font-family: 'Hanna';
+    font-size: 20px;
+} 
+
+h2{
+	font-family: 'Nanum Brush Script';
+	font-size: 30px;
+}
+
+html { overflow-y:scroll; }
+
+#img4d{
+	width: 50px;
+	height:60px;
+}
+#div4countryName{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 35px;
+	font-size: 30px;
+	background-color: #D9C3AA;
+	font-family: 'Jeju Gothic';
+}
+#div2button{
+	position:fixed;
+	top:0px;
+	left: 0px;
+	height: 90px;
+	width:100%;
+	background-color: #D9C3AA;
+    z-index:999;
+}
+
+#div4main{
+	font-family: 'Jeju Gothic';
+	overflow:scroll;
+	position: relative;
+	top: 0px;
+	left: 100px;
+	width: 1300px;
+	height: 300px;
+	border: 3px dotted #69A583;
+	background-color: #F5F1DE;
+}
+
+#div4first{
+	font-family: 'Jeju Gothic';
+	overflow:scroll;
+	position: relative;
+	top: 0px;
+	left: 100px;
+	width: 1300px;
+	height:	300px;
+	border: 3px dotted #E1B378;
+	background-color: #F5F1DE;
+}
+
+#div4second{
+	font-family: 'Jeju Gothic';
+	overflow:scroll;
+	position: relative;
+	top: 0px;
+	left: 100px;
+	width: 1300px;
+	height:	300px;
+	border: 3px dotted #9F0251;
+	background-color: #F5F1DE;
+}
+
+#green_window {
+	display: inline-block;
+	width: 1000px; height: 50px;
+	border: 3px solid #336699;
+	background: white;
+}
+
+#input_text {
+	width: 990px; height: 40px;
+	margin: 6px 0 0 9px;
+	border: 0;
+	line-height: 21px;
+	font-weight: bold;
+	font-size: 16px;
+	outline: none;
+}
+#sch_smit {
+	width: 54px; height: 55px;
+	margin: 0; border: 0;
+	vertical-align: top;
+	background: #336699;
+	color: white;
+	font-weight: bold;
+	border-radius: 1px;
+	cursor: pointer;
+}
+
+#sch_smit:hover {
+	background: #003366;
+}
+
+#p4title{
+	font-family: 'Nanum Brush Script';
+	font-size: 30px;
+	text-align: center;
+}
+
+#p4text{
+	font-family: 'Nanum Brush Script';
+	font-size: 20px;
+}
+
+.myButton {
+    background-color: #599bb3; 
+    border: none;
+    color: white;
+    padding: 1px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Jeju Gothic';
+}
+.myButton:hover {
+	background-color:#408c99;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.myButton1 {
+    background-color: #7d5d3b; 
+    border: none;
+    color: white;
+    padding: 1px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Jeju Gothic';
+}
+.myButton1:hover {
+	background-color:#634b30;
+}
+.myButton1:active {
+	position:relative;
+	top:1px;
+}
+
+.myButton2 {
+    background-color: #fc8d83; 
+    border: none;
+    color: white;
+    padding: 1px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Jeju Gothic';
+}
+.myButton2:hover {
+	background-color:#e4685d;
+}
+.myButton2:active {
+	position:relative;
+	top:1px;
+}
+
+.myButton3 {
+    background-color: #a3a3a3; 
+    border: none;
+    color: white;
+    padding: 1px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Jeju Gothic';
+}
+.myButton3:hover {
+	background-color:#757375;
+}
+.myButton3:active {
+	position:relative;
+	top:1px;
+}
+
+.tabmenu {position:relative; width:100%; height:170px;
+             font-family:dotum,"",verdana;line-height:12px;font-size:12px;color:#555;}
+.tabmenu img {border:none;vertical-align:top;}
+.tabmenu ul {margin:0px;padding:0px;list-style:none;margin-top: 5px;}
+.tabmenu ul li {float:left }
+.tabmenu .tabcontent {display:none; width:100%;height:160px;position:absolute; left:0px;top:10px }
+.tabmenu .morebtn {position:absolute;right:0;top:0px;}
+</style>
+<script type="text/javascript">
+	//국가별 기본저오:
+//var end_point_url = "http://apis.data.go.kr/1262000/CountryBasicService/getCountryBasicList?serviceKey=hWhuvTco12IDxyIfas6k6QB2e9PfdZgWQqWQkCetLzDlsNmAMliQ7gE6YL%2FbIevScN%2BK3qV9KNSkdvOmqdtq5A%3D%3D&isoCode1=LAO";
+//국가별 소식:
+//var end_point_url = "http://apis.data.go.kr/1262000/CountrySafetyService/getCountrySafetyInfo?ServiceKey=hWhuvTco12IDxyIfas6k6QB2e9PfdZgWQqWQkCetLzDlsNmAMliQ7gE6YL%2FbIevScN%2BK3qV9KNSkdvOmqdtq5A%3D%3D&id=ATC0000000004887";
+//현지 연락처:
+//var end_point_url = "http://apis.data.go.kr/1262000/ContactService/getContactInfo?ServiceKey=hWhuvTco12IDxyIfas6k6QB2e9PfdZgWQqWQkCetLzDlsNmAMliQ7gE6YL%2FbIevScN%2BK3qV9KNSkdvOmqdtq5A%3D%3D&id=20";
+//사건 사고 현황: 현지 연락처와 연관 짓는다.
+var end_point_url="http://apis.data.go.kr/1262000/AccidentService/getAccidentInfo?ServiceKey=hWhuvTco12IDxyIfas6k6QB2e9PfdZgWQqWQkCetLzDlsNmAMliQ7gE6YL%2FbIevScN%2BK3qV9KNSkdvOmqdtq5A%3D%3D&id=20";
+
+
+var id4country;
+
+function calldata(m){
+	var iso=document.getElementById("mmenu"+m);
+//기본 정보를 가져온다.
+$(function () {
+	$.ajax({
+		type	 : "GET",
+		url		 : "http://apis.data.go.kr/1262000/CountryBasicService/getCountryBasicList?serviceKey=hWhuvTco12IDxyIfas6k6QB2e9PfdZgWQqWQkCetLzDlsNmAMliQ7gE6YL%2FbIevScN%2BK3qV9KNSkdvOmqdtq5A%3D%3D&isoCode1="+iso.value,
+		dataType : "xml",
+		async 	 : true,
+		success  : response_parse,
+		error	 : error
+	});
+
+	function response_parse(data)
+	{
+		var $xml;
+
+		//$("#box1").text(data.responseText);
+
+		// IE에서 동작 중인가?
+		if(navigator.appName == "Microsoft Internet Explorer") {
+			// IE에서 xml 텍스트 읽는 법
+			// 출처: http://lazygyu.tistory.com/12
+			var xml = new ActiveXObject('Microsoft.XMLDOM');
+			xml.async = false;
+			xml.loadXML(data.responseText);
+
+			$xml = $(xml);
+
+			// IE에선 $("title").text("~~") 가 동작하지 않음.
+			// 출처: http://jacobyou.tistory.com/47
+			//document.title = ($xml.find("countryName").text() + " : " + $xml.find("countryEnName").text());
+		} else {
+			// IE가 아니면 그냥 하면 된다.
+			$xml = $(data.responseText);
+
+			//$("title").text($xml.find("countryName").text() + " : " + $xml.find("countryEnName").text());
+		}
+		var conutrynamfd=$xml.find("countryName").text()+"("+$xml.find("countryEnName").text()+")";
+		var boxhtml = $xml.find("basic").text();
+		id4country= $xml.find("id").text()
+		
+		$(div4countryname).html(conutrynamfd);
+		$(div4main).html(boxhtml);
+		calldata2();
+	}
+	function error (xml)
+	{
+		$("#box1").val("오류");
+	}
+});}
+function calldata2(){
+//사건사고 현황을 가져온다.
+$(function () {
+
+	$.ajax({
+		type	 : "GET",
+		url		 : "http://apis.data.go.kr/1262000/AccidentService/getAccidentInfo?ServiceKey=hWhuvTco12IDxyIfas6k6QB2e9PfdZgWQqWQkCetLzDlsNmAMliQ7gE6YL%2FbIevScN%2BK3qV9KNSkdvOmqdtq5A%3D%3D&id="+id4country,
+		dataType : "xml",
+		async 	 : true,
+		success  : response_parse,
+		error	 : error
+	});
+
+	function response_parse(data)
+	{
+		var $xml;
+
+		//$("#box1").text(data.responseText);
+
+		// IE에서 동작 중인가?
+		if(navigator.appName == "Microsoft Internet Explorer") {
+			// IE에서 xml 텍스트 읽는 법
+			// 출처: http://lazygyu.tistory.com/12
+			var xml = new ActiveXObject('Microsoft.XMLDOM');
+			xml.async = false;
+			xml.loadXML(data.responseText);
+
+			$xml = $(xml);
+
+			// IE에선 $("title").text("~~") 가 동작하지 않음.
+			// 출처: http://jacobyou.tistory.com/47
+			//document.title = ($xml.find("countryName").text() + " : " + $xml.find("countryEnName").text());
+		} else {
+			// IE가 아니면 그냥 하면 된다.
+			$xml = $(data.responseText);
+
+			//$("title").text($xml.find("countryName").text() + " : " + $xml.find("countryEnName").text());
+		}
+
+		var boxhtml = $xml.find("news").text();
+
+		$(div4first).html(boxhtml);
+		calldata3();
+	}
+	
+	function error (xml)
+	{
+		$("#box1").val("오류");
+	}
+});}
+function calldata3(){
+//현지 연락처를 가져온다.
+$(function () {
+
+	$.ajax({
+		type	 : "GET",
+		url		 : "http://apis.data.go.kr/1262000/ContactService/getContactInfo?ServiceKey=hWhuvTco12IDxyIfas6k6QB2e9PfdZgWQqWQkCetLzDlsNmAMliQ7gE6YL%2FbIevScN%2BK3qV9KNSkdvOmqdtq5A%3D%3D&id="+id4country,
+		dataType : "xml",
+		async 	 : true,
+		success  : response_parse,
+		error	 : error
+	});
+
+	function response_parse(data)
+	{
+		var $xml;
+
+		//$("#box1").text(data.responseText);
+
+		// IE에서 동작 중인가?
+		if(navigator.appName == "Microsoft Internet Explorer") {
+			// IE에서 xml 텍스트 읽는 법
+			// 출처: http://lazygyu.tistory.com/12
+			var xml = new ActiveXObject('Microsoft.XMLDOM');
+			xml.async = false;
+			xml.loadXML(data.responseText);
+
+			$xml = $(xml);
+
+			// IE에선 $("title").text("~~") 가 동작하지 않음.
+			// 출처: http://jacobyou.tistory.com/47
+			//document.title = ($xml.find("countryName").text() + " : " + $xml.find("countryEnName").text());
+		} else {
+			// IE가 아니면 그냥 하면 된다.
+			$xml = $(data.responseText);
+
+			//$("title").text($xml.find("countryName").text() + " : " + $xml.find("countryEnName").text());
+		}
+
+		var boxhtml = $xml.find("contact").text();
+
+		$(div4second).html(boxhtml);
+	}
+	
+	function error (xml)
+	{
+		$("#box1").val("오류");
+	}
+});
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$(document).ready(function(){
+        $(".tabmenu").each(function(){
+            var tab = $(this).children("ul");
+            var tabBtn = tab.children("li").children("a");
+            var content = tabBtn.nextAll();
+             
+            // 탭버튼을 클릭했을때
+            tabBtn.click(function(){
+                // 이미 on 상태면 pass
+                if( $(this).hasClass("on") ) return;
+ 
+                // 모든 컨텐츠 부분을 안보이게 한뒤
+                content.hide();
+ 
+                // 클릭한 tab 버튼(a태그) 옆의 모든 태그들은 보이도록
+                $(this).nextAll().show();
+                 
+                // 모든탭 버튼에 있던 on 클래스를 빼고
+                // 현재 클릭한 탭메뉴 버튼에 on 클래스 추가
+                tabBtn.removeClass("on");
+                $(this).addClass("on");
+                 
+                // 탭버튼를 쭉 돌면서 on 클래스가 있는 버튼만 on 이미지로 바꾸고
+                // 나머지 버튼들은 off 이미지로 바꾼다.
+                tabBtn.each(function(){
+                    var src;
+                    var img = $(this).children("img");
+                    if( $(this).hasClass("on") ){
+                        src = img.attr("src").replace("_off.", "_on.");
+                    }else{
+                        src = img.attr("src").replace("_on.", "_off.");
+                    }
+                     
+                    img.attr("src", src);
+                });
+            });
+             
+            // 맨첫번째 탭버튼 클릭처리
+            tabBtn.eq(0).click();
+        });
+    });
+</script>
+	</head>
+	<body>
+	<div class="tabmenu">
+     <ul>
+        <li><a href="#link"><img src="img/menu_01_off.gif" alt="메뉴01" /></a>
+            <ul class="tabcontent">
+            	<p id="p4text">*ㄱ,ㄴ,ㄷ,ㄹ<br>
+                <button type="submit" class="myButton" onclick="calldata(21);" id="mmenu21" value="NPL">네팔</button>
+				<button type="submit" class="myButton"onclick="calldata(22);" id="mmenu22" value="NZL">뉴질랜드</button>
+				<button type="submit" class="myButton"onclick="calldata(31);" id="mmenu31" value="TWN">대만</button>
+				<button type="submit" class="myButton"onclick="calldata(14);" id="mmenu14" value="LAO">라오스</button>
+				<br>*ㅁ,ㅂ,ㅅ,ㅇ<br>
+				<button type="submit" class="myButton"onclick="calldata(16);" id="mmenu16" value="MAC">마카오</button>
+				<button type="submit" class="myButton"onclick="calldata(20);" id="mmenu20" value="MYS">말레이시아</button>
+				<button type="submit" class="myButton"onclick="calldata(17);" id="mmenu17" value="MDV">몰디브</button>
+				<button type="submit" class="myButton"onclick="calldata(19);" id="mmenu19" value="MNG">몽골</button>
+				<button type="submit" class="myButton" onclick="calldata(18);" id="mmenu18" value="MMR">미얀마</button>
+				<button type="submit" class="myButton"onclick="calldata(34);" id="mmenu34" value="VUT">바누아투</button>
+				<button type="submit" class="myButton"onclick="calldata(3);" id="mmenu3" value="BGD">방글라데시</button>
+				<button type="submit" class="myButton"onclick="calldata(33);" id="mmenu33" value="VNM">베트남</button>
+				<button type="submit" class="myButton"onclick="calldata(5);" id="mmenu5" value="BTN">부탄</button>
+				<button type="submit" class="myButton"onclick="calldata(4);" id="mmenu4" value="BRN">브루나이</button>
+				<button type="submit" class="myButton"onclick="calldata(35);" id="mmenu35" value="WSM">사모아</button>
+				<button type="submit" class="myButton"onclick="calldata(15);" id="mmenu15" value="LKA">스리랑카</button>
+				<button type="submit" class="myButton"onclick="calldata(27);" id="mmenu27" value="SGP">싱가폴</button><br><br>
+				<button type="submit" class="myButton"onclick="calldata(1);" id="mmenu1" value="AFG">아프가니스탄</button>
+				<button type="submit" class="myButton"onclick="calldata(2);" id="mmenu2" value="AUS">오스트레일리아</button>
+				<button type="submit" class="myButton"onclick="calldata(32);" id="mmenu32" value="UZB">우즈베키스탄</button>
+				<button type="submit" class="myButton"onclick="calldata(10);" id="mmenu10" value="IND">인도</button>
+				<button type="submit" class="myButton"onclick="calldata(9);" id="mmenu9" value="IDN">인도네시아</button>
+				<button type="submit" class="myButton"onclick="calldata(11);" id="mmenu11" value="JPN">일본</button>
+				<br>*ㅈ,ㅊ,ㅋ,ㅌ,ㅍ,ㅎ<br>
+				<button type="submit" class="myButton" onclick="calldata(6);" id="mmenu6" value="CHN">중국</button>
+				<button type="submit" class="myButton"onclick="calldata(13);" id="mmenu13" value="KHM">캄보디아</button>
+				<button type="submit" class="myButton"onclick="calldata(12);" id="mmenu12" value="KGZ">키르기즈</button>
+				<button type="submit" class="myButton"onclick="calldata(28);" id="mmenu28" value="THA">타이</button>
+				<button type="submit" class="myButton"onclick="calldata(29);" id="mmenu29" value="TLS">동티모르</button>		
+				<button type="submit" class="myButton"onclick="calldata(30);" id="mmenu30" value="TON">통가</button>
+				<button type="submit" class="myButton"onclick="calldata(23);" id="mmenu23" value="PAK">파키스탄</button>		
+				<button type="submit" class="myButton"onclick="calldata(26);" id="mmenu26" value="PNG">파푸아뉴기니</button>
+				<button type="submit" class="myButton"onclick="calldata(25);" id="mmenu25" value="PLW">팔라우</button>		
+				<button type="submit" class="myButton"onclick="calldata(7);" id="mmenu7" value="FJI">피지</button>
+				<button type="submit" class="myButton"onclick="calldata(24);" id="mmenu24" value="PHL">필리핀</button>
+				<button type="submit" class="myButton"onclick="calldata(8);" id="mmenu8" value="HKG">홍콩</button>
+            </ul>
+            <p class="morebtn"><a href="https://www.0404.go.kr/dev/main.mofa"><img id="img4d" src="pic4d.png" alt="MORE" /></a></p>
+        </li>
+        <li><a href="#link"><img src="img/menu_02_off.gif" alt="메뉴02" /></a>
+            <ul class="tabcontent">
+            	<p id="p4text">*ㄱ,ㄴ,ㄷ,ㄹ<br>
+                <button type="submit" class="myButton1"onclick="calldata(51);" id="mmenu51" value="GAB">가봉</button>
+				<button type="submit" class="myButton1"onclick="calldata(52);" id="mmenu52" value="GIN">기니</button>
+				<button type="submit" class="myButton1"onclick="calldata(67);" id="mmenu67" value="GMB">감비아</button>
+				<button type="submit" class="myButton1"onclick="calldata(64);" id="mmenu64" value="NAM">나미비아</button>
+				<button type="submit" class="myButton1"onclick="calldata(65);" id="mmenu65" value="NGA">나이지리아</button>	
+				<button type="submit" class="myButton1"onclick="calldata(75);" id="mmenu75" value="ZAF">남아공화국</button>
+				<button type="submit" class="myButton1"onclick="calldata(60);" id="mmenu60" value="LBR">라이베리아</button>
+				<button type="submit" class="myButton1"onclick="calldata(59);" id="mmenu59" value="LBN">레바논</button>
+				<button type="submit" class="myButton1"onclick="calldata(61);" id="mmenu61" value="LSO">레소토</button>
+				<br>*ㅁ,ㅂ,ㅅ,ㅇ<br>
+				<button type="submit" class="myButton1"onclick="calldata(63);" id="mmenu63" value="MDG">마다가스카르</button>
+				<button type="submit" class="myButton1"onclick="calldata(62);" id="mmenu62" value="MAR">모로코</button>	
+				<button type="submit" class="myButton1"onclick="calldata(40);" id="mmenu40" value="BHR">바레인</button>
+				<button type="submit" class="myButton1"onclick="calldata(39);" id="mmenu39" value="BEN">베냉</button>
+				<button type="submit" class="myButton1"onclick="calldata(41);" id="mmenu41" value="BWA">보츠와나</button>
+				<button type="submit" class="myButton1"onclick="calldata(38);" id="mmenu38" value="BDI">부룬디</button>
+				<button type="submit" class="myButton1"onclick="calldata(70);" id="mmenu70" value="SAU">사우디</button>
+				<button type="submit" class="myButton1"onclick="calldata(72);" id="mmenu72" value="SOM">소말리아</button>
+				<button type="submit" class="myButton1"onclick="calldata(71);" id="mmenu71" value="SDN">수단</button>	
+				<button type="submit" class="myButton1"onclick="calldata(37);" id="mmenu37" value="ARE">아랍에미리트</button>
+				<button type="submit" class="myButton1"onclick="calldata(48);" id="mmenu48" value="DLA">알제리</button>
+				<button type="submit" class="myButton1"onclick="calldata(36);" id="mmenu36" value="AGO">앙골라</button>
+				<button type="submit" class="myButton1"onclick="calldata(49);" id="mmenu49" value="ETH">에티오피아</button>
+				<button type="submit" class="myButton1"onclick="calldata(74);" id="mmenu74" value="YEM">예맨</button>
+				<button type="submit" class="myButton1"onclick="calldata(68);" id="mmenu68" value="OMN">오만</button><br><br>
+				<button type="submit" class="myButton1"onclick="calldata(56);" id="mmenu56" value="JOR">요르단</button>	
+				<button type="submit" class="myButton1"onclick="calldata(53);" id="mmenu53" value="IRN">이란</button>
+				<button type="submit" class="myButton1"onclick="calldata(54);" id="mmenu54" value="IRQ">이라크</button>
+				<button type="submit" class="myButton1"onclick="calldata(55);" id="mmenu55" value="ISR">이스라엘</button>
+				<button type="submit" class="myButton1"onclick="calldata(50);" id="mmenu50" value="EGY">이집트</button>
+				<br>*ㅈ,ㅊ,ㅋ,ㅌ,ㅍ,ㅎ<br>
+				<button type="submit" class="myButton1"onclick="calldata(76);" id="mmenu76" value="ZAM">잠비아</button>
+				<button type="submit" class="myButton1"onclick="calldata(42);" id="mmenu42" value="CAF">중앙아프리카</button>
+				<button type="submit" class="myButton1"onclick="calldata(43);" id="mmenu43" value="CMR">카메룬</button>
+				<button type="submit" class="myButton1"onclick="calldata(47);" id="mmenu47" value="CPV">카보베르데</button>
+				<button type="submit" class="myButton1"onclick="calldata(69);" id="mmenu69" value="QAT">카타르</button>		
+				<button type="submit" class="myButton1"onclick="calldata(57);" id="mmenu57" value="KEN">케냐</button>
+				<button type="submit" class="myButton1"onclick="calldata(46);" id="mmenu46" value="COM">코모로</button>
+				<button type="submit" class="myButton1"onclick="calldata(44);" id="mmenu44" value="COD">콩고민주공화국</button>
+				<button type="submit" class="myButton1"onclick="calldata(45);" id="mmenu45" value="COG">콩고</button>
+				<button type="submit" class="myButton1"onclick="calldata(58);" id="mmenu58" value="KWT">쿠웨이트</button>
+				<button type="submit" class="myButton1"onclick="calldata(73);" id="mmenu73" value="TUN">튀니지</button>		
+				<button type="submit" class="myButton1"onclick="calldata(66);" id="mmenu66" value="NIU">파푸아뉴기니</button>
+            </ul>
+            <p class="morebtn"><a href="https://www.0404.go.kr/dev/main.mofa"><img id="img4d" src="pic4d.png" alt="MORE" /></a></p>
+        </li>
+            <li><a href="#link"><img src="img/menu_03_off.gif" alt="메뉴03" /></a>
+            <ul class="tabcontent">   
+            	<p id="p4text">*ㄱ,ㄴ,ㄷ,ㄹ<br>
+                <button type="submit" class="myButton2"onclick="calldata(94);" id="mmenu94" value="GRC">그리스</button>
+				<button type="submit" class="myButton2"onclick="calldata(107);" id="mmenu107" value="NLD">네덜란드</button>	
+				<button type="submit" class="myButton2"onclick="calldata(106);" id="mmenu106" value="NOR">노르웨이</button>		
+				<button type="submit" class="myButton2"class="myButton2"onclick="calldata(88);" id="mmenu88" value="DEU">독일</button>
+				<button type="submit" class="myButton2"onclick="calldata(89);" id="mmenu89" value="DNK">덴마크</button>
+				<button type="submit" class="myButton2"onclick="calldata(111);" id="mmenu111" value="RUS">러시아</button>	
+				<button type="submit" class="myButton2"onclick="calldata(110);" id="mmenu110" value="ROU">루마니아</button>
+				<button type="submit" class="myButton2"onclick="calldata(103);" id="mmenu103" value="LUX">룩셈부르크</button>
+				<button type="submit" class="myButton2"onclick="calldata(102);" id="mmenu102" value="LTU">리투아니아</button>
+				<button type="submit" class="myButton2"onclick="calldata(101);" id="mmenu101" value="LIE">리히텐슈타인</button>
+				<br>*ㅁ,ㅂ,ㅅ,ㅇ<br>
+				<button type="submit" class="myButton2"onclick="calldata(104);" id="mmenu104" value="MCU">모나코</button>
+				<button type="submit" class="myButton2"onclick="calldata(105);" id="mmenu105" value="MLT">몰타</button>
+				<button type="submit" class="myButton2"onclick="calldata(82);" id="mmenu82" value="BEL">벨기에</button>
+				<button type="submit" class="myButton2"onclick="calldata(85);" id="mmenu85" value="BLR">벨라루스</button>
+				<button type="submit" class="myButton2"onclick="calldata(83);" id="mmenu83" value="BGR">불가리아</button>		
+				<button type="submit" class="myButton2"onclick="calldata(84);" id="mmenu84" value="BIH">보스니아</button>
+				<button type="submit" class="myButton2"onclick="calldata(112);" id="mmenu112" value="SRB">세르비아</button>
+				<button type="submit" class="myButton2"onclick="calldata(86);" id="mmenu86" value="CHE">스위스</button>
+				<button type="submit" class="myButton2"onclick="calldata(115);" id="mmenu115" value="SWE">스웨덴</button>			
+				<button type="submit" class="myButton2"onclick="calldata(90);" id="mmenu90" value="ESP">스페인</button>
+				<button type="submit" class="myButton2"onclick="calldata(113);" id="mmenu113" value="SVK">슬로바키아</button>		
+				<button type="submit" class="myButton2"onclick="calldata(114);" id="mmenu114" value="SVN">슬로베니아</button>
+				<button type="submit" class="myButton2"onclick="calldata(79);" id="mmenu79" value="ARM">아르메니아</button>
+				<button type="submit" class="myButton2"onclick="calldata(98);" id="mmenu98" value="ISL">아이슬란드</button><br><br>
+				<button type="submit" class="myButton2"onclick="calldata(97);" id="mmenu97" value="IRL">아일랜드</button>
+				<button type="submit" class="myButton2"onclick="calldata(81);" id="mmenu81" value="AZE">아제르바이잔</button>
+				<button type="submit" class="myButton2"onclick="calldata(78);" id="mmenu78" value="AND">안도라</button>
+				<button type="submit" class="myButton2"onclick="calldata(77);" id="mmenu77" value="ALB">알바니아</button>
+				<button type="submit" class="myButton2"onclick="calldata(80);" id="mmenu80" value="AUT">오스트리아</button>
+				<button type="submit" class="myButton2"onclick="calldata(99);" id="mmenu99" value="ITA">이탈리아</button>
+				<br>*ㅈ,ㅊ,ㅋ,ㅌ,ㅍ,ㅎ<br>
+				<button type="submit" class="myButton2"onclick="calldata(93);" id="mmenu93" value="GEO">조지아</button>		
+				<button type="submit" class="myButton2"onclick="calldata(87);" id="mmenu87" value="CZE">체코</button>	
+				<button type="submit" class="myButton2"onclick="calldata(100);" id="mmenu100" value="KAZ">카자흐스탄</button>	
+				<button type="submit" class="myButton2"onclick="calldata(95);" id="mmenu95" value="HRY">크로아티아</button>
+				<button type="submit" class="myButton2"onclick="calldata(116);" id="mmenu116" value="TUR">터키</button>
+				<button type="submit" class="myButton2"onclick="calldata(109);" id="mmenu109" value="PRT">포르투칼</button>
+				<button type="submit"class="myButton2" onclick="calldata(108);" id="mmenu108" value="POL">폴란드</button>
+				<button type="submit" class="myButton2"onclick="calldata(92);" id="mmenu92" value="FRA">프랑스</button>
+				<button type="submit" class="myButton2"onclick="calldata(91);" id="mmenu91" value="FIN">핀란드</button>		
+				<button type="submit" class="myButton2"onclick="calldata(96);" id="mmenu96" value="HUN">헝가리</button>
+				</p>
+            </ul>       
+            <p class="morebtn"><a href="https://www.0404.go.kr/dev/main.mofa"><img id="img4d" src="pic4d.png" alt="MORE" /></a></p>
+        </li>
+        <li><a href="#link"><img src="img/menu_04_off.gif" alt="메뉴04" /></a>
+            <ul class="tabcontent">
+            	<p id="p4text">*ㄱ,ㄴ,ㄷ,ㄹ<br>
+                <button type="submit" class="myButton3"onclick="calldata(133);" id="mmenu133" value="GUY">가이아나</button>
+				<button type="submit" class="myButton3"onclick="calldata(132);" id="mmenu132" value="GTM">과테말라</button>
+				<button type="submit" class="myButton3"onclick="calldata(131);" id="mmenu131" value="GRD">그레나다</button>		
+				<button type="submit" class="myButton3"onclick="calldata(128);" id="mmenu128" value="DMA">도미니카</button>
+				<button type="submit" class="myButton3"onclick="calldata(129);" id="mmenu129" value="DOM">도미니카공화국</button>
+				<br>*ㅁ,ㅂ,ㅅ,ㅇ<br>
+				<button type="submit"class="myButton3" onclick="calldata(137);" id="mmenu137" value="MEX">멕시코</button>	
+				<button type="submit"class="myButton3" onclick="calldata(145);" id="mmenu145" value="USA">미국</button>	
+				<button type="submit"class="myButton3" onclick="calldata(122);" id="mmenu122" value="BRB">바베이도스</button>	
+				<button type="submit"class="myButton3" onclick="calldata(118);" id="mmenu118" value="BHS">바하마</button>
+				<button type="submit"class="myButton3" onclick="calldata(144);" id="mmenu144" value="VEN">베네수엘라</button>
+				<button type="submit"class="myButton3" onclick="calldata(119);" id="mmenu119" value="BLZ">벨리즈</button>
+				<button type="submit" class="myButton3"onclick="calldata(120);" id="mmenu120" value="BOL">볼리비아</button>	
+				<button type="submit" class="myButton3"onclick="calldata(121);" id="mmenu121" value="BRA">브라질</button>		
+				<button type="submit" class="myButton3"onclick="calldata(142);" id="mmenu142" value="SUR">수리남</button>
+				<button type="submit" class="myButton3"onclick="calldata(117);" id="mmenu117" value="ARG">아르헨티나</button>
+				<button type="submit"class="myButton3" onclick="calldata(135);" id="mmenu135" value="HTI">아이티</button>	
+				<button type="submit" class="myButton3"onclick="calldata(130);" id="mmenu130" value="ECU">에콰도르</button>	
+				<button type="submit"class="myButton3" onclick="calldata(141);" id="mmenu141" value="SLV">엘살바도르</button>	
+				<button type="submit" class="myButton3"onclick="calldata(134);" id="mmenu134" value="HND">온두라스</button>		
+				<button type="submit" class="myButton3"onclick="calldata(143);" id="mmenu143" value="URY">우루과이</button>	
+				<br>*ㅈ,ㅊ,ㅋ,ㅌ,ㅍ,ㅎ<br>
+				<button type="submit" class="myButton3"onclick="calldata(136);" id="mmenu136" value="JAM">자메이카</button>
+				<button type="submit" class="myButton3"onclick="calldata(124);" id="mmenu124" value="CHL">칠레</button>
+				<button type="submit" class="myButton3"onclick="calldata(123);" id="mmenu123" value="CAN">캐나다</button>			
+				<button type="submit" class="myButton3"onclick="calldata(125);" id="mmenu125" value="COL">콜롬비아</button>		
+				<button type="submit" class="myButton3"onclick="calldata(126);" id="mmenu126" value="CRI">코스타리카</button>
+				<button type="submit" class="myButton3"onclick="calldata(127);" id="mmenu127" value="CUB">쿠바</button>				
+				<button type="submit"class="myButton3" onclick="calldata(138);" id="mmenu138" value="PAN">파나마</button>
+				<button type="submit" class="myButton3"onclick="calldata(140);" id="mmenu140" value="PRY">파라과이</button>	
+				<button type="submit"class="myButton3" onclick="calldata(139);" id="mmenu139" value="PER">페루</button>
+            </ul>
+            <p class="morebtn"><a href="https://www.0404.go.kr/dev/main.mofa"><img id="img4d" src="pic4d.png" alt="MORE" /></a></p>
+        </li>
+    </ul>
+</div><br>
+		<center>
+			<div id="div4countryname"></div>
+ 		<h1>*기본정보*</h1>
+ 		</center>
+		<div id="div4main"></div>
+		<center><h1>*유의사항*</h1></center>
+		<div id="div4first"></div>
+		<center><h1>*연락처*</h1></center>
+		<div id="div4second"></div>
+		</center>
+	</body>
+</html>
