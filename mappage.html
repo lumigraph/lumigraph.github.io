@@ -1,0 +1,107 @@
+
+<!-- 키값은 본인 키로 셋팅하셔야 합니다.  -->
+<!-- 키값은 본인 키로 셋팅하셔야 합니다.  -->
+<!-- 키값은 본인 키로 셋팅하셔야 합니다.  -->
+<!-- 키값은 본인 키로 셋팅하셔야 합니다.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
+</head>
+<body>
+
+<!-- 자바스크립트 -->
+<script>
+  //샘플 좌표들
+  var targetname = ["강남역"];
+  var lat = [37.4972131];
+  var lon = [127.0277963];
+  var map;
+  var markersArray=[];
+  var target=0;
+
+  //맵의 위도 경도 및 줌인 정하기.
+  function initMap() {
+      map = new google.maps.Map(document.getElementById('map'),{
+      center: {lat: lat[target], lng: lon[target]},
+      zoom: 17
+    });
+  }
+
+  function cafe() {
+      //tmap 에서 정보를 가져와 구글맵에 뿌리기
+    for(var i=0;i<markersArray.length;i++)
+    {
+      markersArray[i].setMap(null);
+    }
+    markersArray.length = 0;
+    var xhttp = new XMLHttpRequest();
+     xhttp.onreadystatechange=function(){
+        if(xhttp.readyState == 4 && xhttp.status == 200)
+        {
+             var ApiData = xhttp.responseText;
+             var data = JSON.parse(xhttp.responseText);
+             var poi = data["searchPoiInfo"]["pois"]["poi"];
+           var infowindow = new google.maps.InfoWindow();
+
+           var marker, i;
+
+           for (i = 0; i < poi.length; i++) {
+              //해당 경도에 marker 만들어서 맵에 붙이기.
+             marker = new google.maps.Marker({
+               position: new google.maps.LatLng(poi[i]["frontLat"], poi[i]["frontLon"]),
+               map: map
+             });
+
+               //marker에 이벤트 주기
+             google.maps.event.addListener(marker, 'click', (function(marker, i) {
+               return function() {
+                 infowindow.setContent(poi[i]["name"]);
+                 infowindow.open(map, marker);
+               }
+             })(marker, i));
+
+             markersArray.push(marker);
+           }
+
+        }
+     };
+       //tmap get 방식 url 타겟 + 카페 명으로 검색하였다.
+
+
+       //키는 본인것으로 설정하셔야합니다.
+       //키는 본인것으로 설정하셔야합니다.
+       //키는 본인것으로 설정하셔야합니다.
+       //키는 본인것으로 설정하셔야합니다.
+
+     xhttp.open("GET","https://apis.skplanetx.com/tmap/pois?appKey=티맵키&areaLMCode=&centerLon=&centerLat=&count=&page=&reqCoordType=&searchKeyword="+targetname[target]+" 카페&callback=&areaLLCode=&multiPoint=&searchtypCd=&radius=&searchType=&resCoordType=WGS84GEO&version=1",true);
+     xhttp.send();
+  }
+</script>
+<br>
+<div align="center">
+<!-- 맵 위치 및 크기 정하기  -->
+<div id="map" style="width:800px; height:400px;"></div>
+
+
+<!-- 맵 키 및 초기화 펑션 등록  -->
+
+<!-- 키값은 본인 키로 셋팅하셔야 합니다.  -->
+<!-- 키값은 본인 키로 셋팅하셔야 합니다.  -->
+<!-- 키값은 본인 키로 셋팅하셔야 합니다.  -->
+<!-- 키값은 본인 키로 셋팅하셔야 합니다.  -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=구글키&callback=initMap">
+</script>
+
+    <div><br>
+    <button style="height:50px;" onclick="cafe()">
+      카페
+    </button>
+    </div>
+
+  </body>
+</html>
