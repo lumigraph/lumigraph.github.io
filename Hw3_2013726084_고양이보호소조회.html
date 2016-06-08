@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>CAT</title>
+	<script type="text/javascript" src="./lib/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="./lib/xml2json.js"></script>
+	<script type="text/javascript" src="./lib/jquery.xdomainajax.js"></script>
+<script type="text/javascript">
+	function cat(){
+	var end_point_url = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic"; /*URL*/
+	var authentication_key = "hBDDdFLe2ytF4Cp426R0EXJm4g6wO7wlS7hzqJja8ogc2ivOhkNYZcFEaopp2nBVJzRDyke6Hz5H5hq8b9izJQ%3D%3D";
+	var sidoparse = $('#sido').val();
+	var start = $('#startdate').val();
+	var queryParams = '?' + ('ServiceKey') + '=' + authentication_key; /*Service Key*/
+	queryParams += '&' + ('bgnde') + '=' + (start); /*유기날짜(검색시작)*/
+	queryParams += '&' + ('endde') + '=' + (''); /*유기날짜(검색종료)*/
+	queryParams += '&' + ('upkind') + '=' + ('422400'); /*축종코드(고양이)*/
+	queryParams += '&' + ('kind') + '=' + ('000116'); /*품종코드(고양이)*/
+	queryParams += '&' + ('upr_cd') + '=' + (sidoparse);/*시도코드*/
+	queryParams += '&' + ('org_cd') + '=' + ('');/*시군구코드*/
+	queryParams += '&' + ('care_reg_cd') + '=' + ('');/*보호소번호*/
+	queryParams += '&' + ('state') + '=' + ('');/*상태*/
+	queryParams += '&' + ('pageNo') + '=' + ('');/*페이지 번호*/
+	queryParams += '&' + ('numOfRows') + '=' + ('100');/*검색갯수*/
+	$.ajax({
+		type : "GET",
+		url : end_point_url + queryParams,
+		dataType : "xml",
+		async : true, 
+		success : response_parse,
+		error : error
+	});
+	function response_parse(data)
+	{
+		var $xml = $(data.responseText);	
+		var care_addr = [];
+		var care_nm = [];
+		var care_tel = [];
+		var special_mark = [];
+		var w_eight = [];
+		var sex_cd = [];
+		var s_tate = [];
+		var pop_file=[];
+		var notice_sdt = [];
+		var i = 0;
+		var j = 0;
+		$xml.find("items").find("item").each(function()
+		{
+
+			pop_file[i] = $(this).find("popfile").text();
+			care_addr[i] = $(this).find("careAddr").text();
+			s_tate[i] = $(this).find("processState").text();
+			care_nm[i] = $(this).find("careNm").text();
+			care_tel[i] = $(this).find("careTel").text();
+			special_mark[i] = $(this).find("specialMark").text();
+			w_eight[i] = $(this).find("weight").text();
+			sex_cd[i] = $(this).find("sexCd").text();
+			notice_sdt[i] = $(this).find("noticeSdt").text();
+
+			i++;
+		});
+		var arr;
+		arr = "<table style='width:100%'>";
+		for(j=0; j<i; j++)
+		{
+			arr += "<tr>" + "<td>" + 
+			"<img src="+ pop_file[j] + ">"+"<br>" +"공고일 : " +notice_sdt[j] +"<br>"+ "주소 : "+ care_addr[j] + "<br>"+ "상태 : "+ s_tate[j] + "<br>" + "이름 : "+ care_nm[j] + "<br>" + "전화 : "+ care_tel[j] + "<br>" + "특이 : "+special_mark[j] + "<br>" + "무게 : "+  w_eight[j]+ "<br>" + "성별 : "+ sex_cd[j]+ "<br>"
+			+ "</td>" + "</tr>" ;
+		}
+		arr += "</table>";
+		
+		document.getElementById("box2").innerHTML = arr; 	
+	}
+	function error (xml)
+	{
+		$("#box2").val("오류");
+	}
+}
+</script>
+</head>
+
+<body>
+<center>
+	<div style=" margin: 80px;text-align: center;">
+		<img src="cat.jpg" width="300" height="200">
+	</div>
+	<div style=" margin: 40px;text-align: center;" >
+		
+		<fieldset>
+    		<legend>고양이 보호소 조회</legend>
+    		검색시작날짜 : <p style="font: gray; font-size: 8px">예)2016년 1월 1일 -> 20160101</p>
+ 			<input id="startdate" name="startdate" type="text"></input><br>
+ 			<p style="font-size: 8px">*현재일까지 검색됩니다.</p>
+ 			시/도:<br>
+ 			<select id="sido">
+ 				<option value="6110000">서울특별시</option>
+ 				<option value="6260000">부산광역시</option>
+ 				<option value="6270000">대구광역시</option>
+ 				<option value="6280000">인천광역시</option>
+ 				<option value="6290000">광주광역시</option>
+ 				<option value="5690000">세종특별자치시</option>
+ 				<option value="6300000">대전광역시</option>
+ 				<option value="6310000">울산광역시</option>
+ 				<option value="6410000">경기도</option>
+ 				<option value="6420000">강원도</option>
+ 				<option value="6430000">충청북도</option>
+ 				<option value="6440000">충청남도</option>
+ 				<option value="6450000">전라북도</option>
+ 				<option value="6460000">전라남도</option>
+ 				<option value="6470000">경상북도</option>
+ 				<option value="6480000">경상남도</option>
+ 				<option value="6500000">제주특별자치도</option>
+ 			</select>
+ 			<br>
+ 			
+ 				
+ 			<br>
+    		<input type="button" value="확인" onclick="cat()"></input>
+
+  		</fieldset>
+  		
+	</div>
+
+
+</center>
+<div id="box2" style='border:1px solid black;word-break:break-all;'></div>
+</body>
+
+</html>
