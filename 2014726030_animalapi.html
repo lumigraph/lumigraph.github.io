@@ -10,7 +10,7 @@
 
 	
 	<div id="head">
-	<h1><p> * * *  </p><image src="paw.png"> 내 pet을 찾아서</h1>
+	<h1><p> * * *  </p> 내 pet을 찾아서</h1>
 	</div>
 	
 	<div class="wrap">
@@ -32,9 +32,8 @@
 	</div>
 	
 	<div id="warning">
-	
-	<p2>*입양시 주의사항*</p2>
 	<br></br>
+	<p3>*입양시 주의사항*</p3><br></br>
 	<hr></hr>
 	<br></br><p><strong>시·군·구청에서 보호하고 있는 유기동물 중 <br></br>보호시설에 공고한 지 10일이 지나도
 	주인이 나타나지 않는 경우, 일반인에게 분양할 수 있습니다.</strong></p><br></br>
@@ -57,11 +56,8 @@
 	
 	
 	<div id="seecat">
-	<p >*보호중인 동물 검색*</p>
-	<br></br>
-
-	<button class="btn1" type="submit" onclick="cat();"><img class="btn-img1" src="day.jpg"></button>
-	<button class="btn2" type="submit" onclick="cat_location();"><img class="btn-img2" src="korea.jpg"></button>
+	<button class="btn1" type="submit" onclick="cat();">날짜별 출력 검색 버튼</button>
+	<button class="btn2" type="submit" onclick="cat_location();">지역별 출력 검색 버튼</button>
 	<br></br><br></br><br></br><br></br>
 	<input type="text" id="input1"/>
 	<select id='input3'>
@@ -83,13 +79,16 @@
 			<option value="6480000">경상남도</option>
 			<option value="6500000">제주도</option>
 		</select>
-	<div class="box1"></div>
-	<div class="box3"></div>
+	<div class="box1"></p>
+	</div>
+	<div class="box3"><p><strong>*보호중인 동물 검색*<br></br><br></br>날짜별 출력 검색 버튼 : 지금 보호중인 유기동물만 검색 됩니다. 최근 날짜를 입력해 주세요.</strong> ex:)20160605</p>
+	<p><strong><br></br>지역별 출력 검색 버튼 : 지역을 선택하여 버튼을 눌러주세요.</strong></div>
 	</div>
 	
 	<div id="seedog">
-	<button class="btn1" type="submit" onclick="dog();"><img class="btn-img1"src="day.jpg"></button>
-	<button class="btn2" type="submit" onclick="dog_location();"><img class="btn-img2"src="korea.jpg"></button>
+	<button class="btn1" type="submit" onclick="dog();">날짜별 출력 검색 버튼</button>
+	<br></br>
+	<button class="btn2" type="submit" onclick="dog_location();">지역별 출력 검색 버튼</button>
 	<br></br><br></br><br></br><br></br>
 	<input type="text" id="input2"/>
 	<select id='input4'>
@@ -112,7 +111,8 @@
 			<option value="6500000">제주도</option>
 		</select>
 	<div class="box2"></div>
-	<div class="box4"></div>
+	<div class="box4"><p><strong>*보호중인 동물 검색*<br></br><br></br>날짜별 출력 검색 버튼 : 지금 보호중인 유기동물만 검색 됩니다. 최근 날짜를 입력하고 버튼을 눌러주세요.</strong> ex:)20160605</p>
+	<p><strong><br></br>지역별 출력 검색 버튼 : 지역을 선택하고 버튼을 눌러주세요.</strong></div>
 	</div>
 	
 </body>
@@ -153,11 +153,11 @@ function cat() {
 	var str = "";
 	
 	$(xmlData).each(function() {
-		str += "<br></br><image height=40px src='cat.ico'>"+"<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
+		str += "<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
 
-		str +="<br></br><image height=30px width=auto src='map.ico'>"+"<br></br>"+ $(this).find("careNm").text()+
+		str +="<br></br>"+ $(this).find("careNm").text()+
 		$(this).find("careTel").text()+"<br></br>"+
-		$(this).find("careAddr").text()+"<br></br><image height=15px src='see.jpg'>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
+		$(this).find("careAddr").text()+"<br></br>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
 		
 	});
 		$(".box1").html(str);
@@ -204,12 +204,12 @@ function cat2() {
 	var str = "";
 
 	$(xmlData).each(function() {
-		str += "<br></br><image height=40px src='cat.ico'>"+"<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
+		str += "<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
 
-		str +="<br></br><image height=30px width=auto src='map.ico'>"+"<br></br>"+ $(this).find("careNm").text()+
+		str +="<br></br>"+ $(this).find("careNm").text()+
 		$(this).find("careTel").text()+"<br></br>"+
-		$(this).find("careAddr").text()+"<br></br><image height=15px src='see.jpg'>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
-		
+		$(this).find("careAddr").text()+"<br></br>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
+
 	});
 		$(".box3").html(str);
 		
@@ -250,11 +250,11 @@ function dog() {
 
 		
 	$(xmlData).each(function() {
-		str += "<br></br><image height=40px src='dog_sub.jpg'>"+"<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
+		str += "<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
 
-		str +="<br></br><image height=30px width=auto src='map.ico'>"+"<br></br>"+ $(this).find("careNm").text()+
+		str +="<br></br>"+ $(this).find("careNm").text()+
 		$(this).find("careTel").text()+"<br></br>"+
-		$(this).find("careAddr").text()+"<br></br><image height=15px src='see.jpg'>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
+		$(this).find("careAddr").text()+"<br></br>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
 		
 	});
 		$(".box2").html(str);
@@ -301,11 +301,11 @@ function dog2() {
 
 		
 	$(xmlData).each(function() {
-		str += "<br></br><image height=40px src='dog_sub.jpg'>"+"<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
+		str += "<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
 
-		str +="<br></br><image height=30px width=auto src='map.ico'>"+"<br></br>"+ $(this).find("careNm").text()+
+		str +="<br></br>"+ $(this).find("careNm").text()+
 		$(this).find("careTel").text()+"<br></br>"+
-		$(this).find("careAddr").text()+"<br></br><image height=15px src='see.jpg'>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
+		$(this).find("careAddr").text()+"<br></br>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
 		
 	});
 		$(".box4").html(str);
@@ -353,11 +353,11 @@ function cat_location() {
 	var str = "";
 	
 	$(xmlData).each(function() {
-		str += "<br></br><image height=40px src='cat.ico'>"+"<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
+		str += "<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
 
-		str +="<br></br><image height=30px width=auto src='map.ico'>"+"<br></br>"+ $(this).find("careNm").text()+
+		str +="<br></br>"+ $(this).find("careNm").text()+
 		$(this).find("careTel").text()+"<br></br>"+
-		$(this).find("careAddr").text()+"<br></br><image height=15px src='see.jpg'>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
+		$(this).find("careAddr").text()+"<br></br>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
 		
 	});
 		$(".box1").html(str);
@@ -406,11 +406,11 @@ function cat_location2() {
 	var str = "";
 
 	$(xmlData).each(function() {
-		str += "<br></br><image height=40px src='cat.ico'>"+"<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
+		str += "<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
 
-		str +="<br></br><image height=30px width=auto src='map.ico'>"+"<br></br>"+ $(this).find("careNm").text()+
+		str +="<br></br>"+ $(this).find("careNm").text()+
 		$(this).find("careTel").text()+"<br></br>"+
-		$(this).find("careAddr").text()+"<br></br><image height=15px src='see.jpg'>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
+		$(this).find("careAddr").text()+"<br></br>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
 		
 	});
 		$(".box3").html(str);
@@ -455,11 +455,11 @@ function dog_location() {
 
 		
 	$(xmlData).each(function() {
-		str += "<br></br><image height=40px src='dog_sub.jpg'>"+"<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
+		str += "<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
 
-		str +="<br></br><image height=30px width=auto src='map.ico'>"+"<br></br>"+ $(this).find("careNm").text()+
+		str +="<br></br>"+ $(this).find("careNm").text()+
 		$(this).find("careTel").text()+"<br></br>"+
-		$(this).find("careAddr").text()+"<br></br><image height=15px src='see.jpg'>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
+		$(this).find("careAddr").text()+"<br></br>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
 		
 	});
 		$(".box2").html(str);
@@ -508,11 +508,11 @@ function dog_location2() {
 
 		
 	$(xmlData).each(function() {
-		str += "<br></br><image height=40px src='dog_sub.jpg'>"+"<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
+		str += "<br></br>"+"<image width=auto height=100px src='" + $(this).find("filename").text() + "'/>" 
 
-		str +="<br></br><image height=30px width=auto src='map.ico'>"+"<br></br>"+ $(this).find("careNm").text()+
+		str +="<br></br>"+ $(this).find("careNm").text()+
 		$(this).find("careTel").text()+"<br></br>"+
-		$(this).find("careAddr").text()+"<br></br><image height=15px src='see.jpg'>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
+		$(this).find("careAddr").text()+"<br></br>"+$(this).find("noticeNo").text()+"<br></br><hr></hr>";
 		
 	});
 		$(".box4").html(str);
@@ -791,6 +791,14 @@ nav ul ul li a{
 	display:block;
 }
 
+#warning p3{
+font-family: a옛날목욕탕L;
+	font-size: 15px;
+	padding:15px 10px;
+	color: blue;
+	float: center;
+}
+
 #warning p{
 	font-family: a옛날목욕탕L;
 	font-size: 20px;
@@ -832,7 +840,7 @@ nav ul ul li a{
 	position: absolute;
 	top:350px;
 	left:500px;
-	font-family: 좋은_로마의휴일;
+	font-family: 좋은_로마의휴일?
 	font-size: 15px;
 	float:right;
 }
@@ -866,14 +874,14 @@ nav ul ul li a{
 	float:left;
 	
 	position: absolute;
-	top:435px;
+	top:335px;
 	left:200px;
 }
 #input2{
 	margin:2px 0px 0px 0px;
 	float:left;
 	position: absolute;
-	top:435px;
+	top:335px;
 	left:200px;
 }
 
@@ -882,7 +890,7 @@ nav ul ul li a{
 	float:left;
 	
 	position: absolute;
-	top:650px;
+	top:530px;
 	left:215px;
 }
 
@@ -891,7 +899,7 @@ nav ul ul li a{
 	float:left;
 	
 	position: absolute;
-	top:650px;
+	top:530px;
 	left:215px;
 }
 #seedog{
@@ -918,6 +926,7 @@ nav ul ul li a{
 	font-size: 15px;
 	float:right;
 }
+
 
 
 
