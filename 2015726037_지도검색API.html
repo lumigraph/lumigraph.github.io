@@ -1,0 +1,276 @@
+
+<head><title>Prototype</title><style>.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'?뗭?',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}</style><script src="http://s1.daumcdn.net/svc/original/U03/cssjs/jquery/jquery-1.11.0.js"></script><script src="http://apis.daum.net/maps/maps3.js?apikey=f9d063acf21498bc85c73d9171a5de2a&libraries=services,clusterer"></script><script>document.onkeydown = function(e) { e = e || window.event; var code = e.keyCode || e.which;  if ( code == 27 ) { parent.$( parent.document ).trigger( "keydown", [ true ] ); } };</script></head><body><div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+
+    <div id="menu_wrap" class="bg_white">
+        <div class="option">
+            <div>
+                <form onsubmit="searchPlaces(); return false;">
+                    검색 : <input type="text" value="광운대" id="keyword" size="15"> 
+                    <button type="submit">검색하기</button> 
+                </form>
+            </div>
+        </div>
+        <hr>
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+    </div>
+</div>
+<script>
+// 留덉빱瑜? ?댁쓣 諛곗뿴?낅땲??
+var markers = [];
+
+var mapContainer = document.getElementById('map'), // 吏??꾨? ?쒖떆?? div 
+    mapOption = {
+        center: new daum.maps.LatLng(37.566826, 126.9786567), // 吏??꾩쓽 以묒떖醫뚰몴
+        level: 3 // 吏??꾩쓽 ?뺣? ?덈꺼
+    };  
+
+// 吏??꾨? ?앹꽦?⑸땲??    
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+            var zoomControl = new daum.maps.ZoomControl();
+            map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+            var mapTypeControl = new daum.maps.MapTypeControl();
+            map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+
+// ?μ냼 寃??? 媛앹껜瑜? ?앹꽦?⑸땲??
+var ps = new daum.maps.services.Places();  
+
+// 寃??? 寃곌낵 紐⑸줉?대굹 留덉빱瑜? ?대┃?덉쓣 ?? ?μ냼紐낆쓣 ?쒖텧?? ?명룷?덈룄?곕? ?앹꽦?⑸땲??
+var infowindow = new daum.maps.InfoWindow({zIndex:1});
+
+// ?ㅼ썙?쒕줈 ?μ냼瑜? 寃??됲빀?덈떎
+searchPlaces();
+
+// ?ㅼ썙?? 寃??됱쓣 ?붿껌?섎뒗 ?⑥닔?낅땲??
+function searchPlaces() {
+
+    var keyword = document.getElementById('keyword').value;
+
+    if (!keyword.replace(/^\s+|\s+$/g, '')) {
+        alert('검색어를 입력하세요!');
+        return false;
+    }
+
+    // ?μ냼寃??? 媛앹껜瑜? ?듯빐 ?ㅼ썙?쒕줈 ?μ냼寃??됱쓣 ?붿껌?⑸땲??
+    ps.keywordSearch( keyword, placesSearchCB); 
+}
+
+// ?μ냼寃??됱씠 ?꾨즺?먯쓣 ?? ?몄텧?섎뒗 肄쒕갚?⑥닔 ?낅땲??
+function placesSearchCB(status, data, pagination) {
+    if (status === daum.maps.services.Status.OK) {
+
+        // ?뺤긽?곸쑝濡? 寃??됱씠 ?꾨즺?먯쑝硫?
+        // 寃??? 紐⑸줉怨? 留덉빱瑜? ?쒖텧?⑸땲??
+        displayPlaces(data.places);
+
+        // ?섏씠吏? 踰덊샇瑜? ?쒖텧?⑸땲??
+        displayPagination(pagination);
+
+    } else if (status === daum.maps.services.Status.ZERO_RESULT) {
+
+        alert('검색결과가 존재하지않습니다.');
+        return;
+
+    } else if (status === daum.maps.services.Status.ERROR) {
+
+        alert('검색 중 오류가 발생하였습니다.');
+        return;
+
+    }
+}
+
+// 寃??? 寃곌낵 紐⑸줉怨? 留덉빱瑜? ?쒖텧?섎뒗 ?⑥닔?낅땲??
+function displayPlaces(places) {
+
+    var listEl = document.getElementById('placesList'), 
+    menuEl = document.getElementById('menu_wrap'),
+    fragment = document.createDocumentFragment(), 
+    bounds = new daum.maps.LatLngBounds(), 
+    listStr = '';
+    
+    // 寃??? 寃곌낵 紐⑸줉?? 異붽??? ??ぉ?ㅼ쓣 ?쒓굅?⑸땲??
+    removeAllChildNods(listEl);
+
+    // 吏??꾩뿉 ?쒖떆?섍퀬 ?덈뒗 留덉빱瑜? ?쒓굅?⑸땲??
+    removeMarker();
+    
+    for ( var i=0; i<places.length; i++ ) {
+
+        // 留덉빱瑜? ?앹꽦?섍퀬 吏??꾩뿉 ?쒖떆?⑸땲??
+        var placePosition = new daum.maps.LatLng(places[i].latitude, places[i].longitude),
+            marker = addMarker(placePosition, i), 
+            itemEl = getListItem(i, places[i], marker); // 寃??? 寃곌낵 ??ぉ Element瑜? ?앹꽦?⑸땲??
+
+        // 寃??됰맂 ?μ냼 ?꾩튂瑜? 湲곗??쇰줈 吏??? 踰붿쐞瑜? ?ъ꽕?뺥븯湲곗쐞??
+        // LatLngBounds 媛앹껜?? 醫뚰몴瑜? 異붽??⑸땲??
+        bounds.extend(placePosition);
+
+        // 留덉빱?? 寃??됯껐怨? ??ぉ?? mouseover ?덉쓣??
+        // ?대떦 ?μ냼?? ?명룷?덈룄?곗뿉 ?μ냼紐낆쓣 ?쒖떆?⑸땲??
+        // mouseout ?덉쓣 ?뚮뒗 ?명룷?덈룄?곕? ?レ뒿?덈떎
+        (function(marker, title) {
+            daum.maps.event.addListener(marker, 'mouseover', function() {
+                displayInfowindow(marker, title);
+            });
+
+            daum.maps.event.addListener(marker, 'mouseout', function() {
+                infowindow.close();
+            });
+
+            itemEl.onmouseover =  function () {
+                displayInfowindow(marker, title);
+            };
+
+            itemEl.onmouseout =  function () {
+                infowindow.close();
+            };
+        })(marker, places[i].title);
+
+        fragment.appendChild(itemEl);
+    }
+
+    // 寃??됯껐怨? ??ぉ?ㅼ쓣 寃??됯껐怨? 紐⑸줉 Elemnet?? 異붽??⑸땲??
+    listEl.appendChild(fragment);
+    menuEl.scrollTop = 0;
+
+    // 寃??됰맂 ?μ냼 ?꾩튂瑜? 湲곗??쇰줈 吏??? 踰붿쐞瑜? ?ъ꽕?뺥빀?덈떎
+    map.setBounds(bounds);
+}
+
+// 寃??됯껐怨? ??ぉ?? Element濡? 諛섑솚?섎뒗 ?⑥닔?낅땲??
+function getListItem(index, places) {
+
+    var el = document.createElement('li'),
+    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
+                '<div class="info">' +
+                '   <h5>' + places.title + '</h5>';
+
+    if (places.newAddress) {
+        itemStr += '    <span>' + places.newAddress + '</span>' +
+                    '   <span class="jibun gray">' +  places.address  + '</span>';
+    } else {
+        itemStr += '    <span>' +  places.address  + '</span>'; 
+    }
+                 
+      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
+                '</div>';           
+
+    el.innerHTML = itemStr;
+    el.className = 'item';
+
+    return el;
+}
+
+// 留덉빱瑜? ?앹꽦?섍퀬 吏??? ?꾩뿉 留덉빱瑜? ?쒖떆?섎뒗 ?⑥닔?낅땲??
+function addMarker(position, idx, title) {
+    var imageSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 留덉빱 ?대?吏? url, ?ㅽ봽?쇱씠?? ?대?吏?瑜? ?곷땲??
+        imageSize = new daum.maps.Size(36, 37),  // 留덉빱 ?대?吏??? ?ш린
+        imgOptions =  {
+            spriteSize : new daum.maps.Size(36, 691), // ?ㅽ봽?쇱씠?? ?대?吏??? ?ш린
+            spriteOrigin : new daum.maps.Point(0, (idx*46)+10), // ?ㅽ봽?쇱씠?? ?대?吏? 以? ?ъ슜?? ?곸뿭?? 醫뚯긽?? 醫뚰몴
+            offset: new daum.maps.Point(13, 37) // 留덉빱 醫뚰몴?? ?쇱튂?쒗궗 ?대?吏? ?댁뿉?쒖쓽 醫뚰몴
+        },
+        markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+            marker = new daum.maps.Marker({
+            position: position, // 留덉빱?? ?꾩튂
+            image: markerImage 
+        });
+
+    marker.setMap(map); // 吏??? ?꾩뿉 留덉빱瑜? ?쒖텧?⑸땲??
+    markers.push(marker);  // 諛곗뿴?? ?앹꽦?? 留덉빱瑜? 異붽??⑸땲??
+
+    return marker;
+}
+
+// 吏??? ?꾩뿉 ?쒖떆?섍퀬 ?덈뒗 留덉빱瑜? 紐⑤몢 ?쒓굅?⑸땲??
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+
+// 寃??됯껐怨? 紐⑸줉 ?섎떒?? ?섏씠吏?踰덊샇瑜? ?쒖떆?? ?⑥닔?낅땲??
+function displayPagination(pagination) {
+    var paginationEl = document.getElementById('pagination'),
+        fragment = document.createDocumentFragment(),
+        i; 
+
+    // 湲곗〈?? 異붽??? ?섏씠吏?踰덊샇瑜? ??젣?⑸땲??
+    while (paginationEl.hasChildNodes()) {
+        paginationEl.removeChild (paginationEl.lastChild);
+    }
+
+    for (i=1; i<=pagination.last; i++) {
+        var el = document.createElement('a');
+        el.href = "#";
+        el.innerHTML = i;
+
+        if (i===pagination.current) {
+            el.className = 'on';
+        } else {
+            el.onclick = (function(i) {
+                return function() {
+                    pagination.gotoPage(i);
+                }
+            })(i);
+        }
+
+        fragment.appendChild(el);
+    }
+    paginationEl.appendChild(fragment);
+}
+
+// 寃??됯껐怨? 紐⑸줉 ?먮뒗 留덉빱瑜? ?대┃?덉쓣 ?? ?몄텧?섎뒗 ?⑥닔?낅땲??
+// ?명룷?덈룄?곗뿉 ?μ냼紐낆쓣 ?쒖떆?⑸땲??
+function displayInfowindow(marker, title) {
+    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+    infowindow.setContent(content);
+    infowindow.open(map, marker);
+}
+
+ // 寃??됯껐怨? 紐⑸줉?? ?먯떇 Element瑜? ?쒓굅?섎뒗 ?⑥닔?낅땲??
+function removeAllChildNods(el) {   
+    while (el.hasChildNodes()) {
+        el.removeChild (el.lastChild);
+    }
+}
+</script></body>
